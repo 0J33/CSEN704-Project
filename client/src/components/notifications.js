@@ -11,7 +11,7 @@ function Notifications() {
     }, []);
 
     const fetchNotifications = () => {
-        axios.get('http://localhost:3000/getMedNotifications')
+        axios.get('http://localhost:3200/getMedNotifications')
             .then(response => {
                 setNotifications(response.data);
             })

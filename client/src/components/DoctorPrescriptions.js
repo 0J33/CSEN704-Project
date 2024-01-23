@@ -110,7 +110,7 @@ function DoctorPrescriptions() {
   };
 
   const fetchMedicines = () => {
-    axios.get('http://localhost:3000/medicines')
+    axios.get('http://localhost:3200/medicines')
       .then(response => {
         setMedicines(response.data);
       })

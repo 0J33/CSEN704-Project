@@ -28,7 +28,7 @@ function RegisterPatient() {
         console.log(credentials);
     
         // Making a POST request to the server
-        fetch('http://localhost:3000/addPatient', {
+        fetch('http://localhost:3200/addPatient', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

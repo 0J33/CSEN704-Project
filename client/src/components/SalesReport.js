@@ -12,7 +12,7 @@ const SalesReport = () => {
   const fetchSalesReport = async () => {
   try {
     // Assuming your backend function is expecting just the month in 'YYYY-MM' format 
-    const response = await axios.get(`http://localhost:3000/getSalesReport/${month}`);
+    const response = await axios.get(`http://localhost:3200/getSalesReport/${month}`);
     
     setSales(response.data);
     setError('');
@@ -26,7 +26,7 @@ const SalesReport = () => {
 
 const fetchSalesReportByMedicineDate = async () => {
   try {
-    const response = await axios.get(`http://localhost:3000/getSalesReportByMedicine/${month}/${medicine}`);
+    const response = await axios.get(`http://localhost:3200/getSalesReportByMedicine/${month}/${medicine}`);
     setSales(response.data);
     setError('');
   } catch (error) {

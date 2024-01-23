@@ -22,7 +22,7 @@ const ChangePassword = () => {
         console.log(payload);
 
         try {
-            const response = await fetch('http://localhost:3000/changePassword', {
+            const response = await fetch('http://localhost:3200/changePassword', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

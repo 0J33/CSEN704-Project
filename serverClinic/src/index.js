@@ -9,7 +9,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 app.use(cors());
 const stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY);
-const port = process.env.PORT || "3000";
+const port = process.env.PORT || "3100";
 
 app.use(bodyParser.json({ limit: '50mb' })); // for parsing application/json
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true })); // for parsing application/x-www-form-urlencoded

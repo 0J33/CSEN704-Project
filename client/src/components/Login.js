@@ -20,7 +20,7 @@ function Login() {
         e.preventDefault();
     
         // Making a POST request to the server
-        fetch('http://localhost:3000/login', {
+        fetch('http://localhost:3200/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -109,17 +109,18 @@ function Login() {
                     className="form-control"
                 />
             </div>
-            <button type="submit" className="btn btn-primary">Login In Pharmacy</button>
-            <button type="button" className="btn btn-primary ms-5" onClick={loginClinic} >Login In Clinic</button>
-            <button type="button" className="btn btn-secondary ms-5" onClick={() => window.location.href='/register-patient'}>Register As Pharmacy Patient</button>
-            <button type="button" className="btn btn-secondary ms-5" onClick={() => window.location.href='/register-pharmacist'}>Register As Pharmacist</button>
-            <button type="button" className="btn btn-secondary ms-5" onClick={() => window.location.href='/register-patient-clinic'}>Register As Clinic Patient</button>
-            <button type="button" className="btn btn-secondary ms-5" onClick={() => window.location.href='/register-doctor'}>Register As Doctor</button>
-
+            <button type="submit" className="btn btn-primary">Login In Pharmacy</button> 
+            <button type="button" className="btn btn-primary ms-5" onClick={loginClinic} >Login In Clinic</button> 
+            <br /><br />
+            <button type="button" className="btn btn-secondary" onClick={() => window.location.href='/register-patient'}>Register As Pharmacy Patient</button> 
+            <button type="button" className="btn btn-secondary ms-5" onClick={() => window.location.href='/register-patient-clinic'}>Register As Clinic Patient</button> 
+            <br /><br />
+            <button type="button" className="btn btn-secondary" onClick={() => window.location.href='/register-pharmacist'}>Register As Pharmacist</button> 
+            <button type="button" className="btn btn-secondary ms-5" onClick={() => window.location.href='/register-doctor'}>Register As Doctor</button> 
+            <br /><br />
+            <ForgetPassword></ForgetPassword>
+            <ForgetPasswordClinic></ForgetPasswordClinic>
         </form>
-
-        <ForgetPassword></ForgetPassword>
-        <ForgetPasswordClinic></ForgetPasswordClinic>
         </div>
 
         

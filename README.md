@@ -158,7 +158,7 @@ Testing is done using Postman for API routes. Jest is used for unit testing comp
 ## How to Use
 To use the system:
 1. Start the server: `npm start`
-2. Navigate to `http://localhost:3000` in your web browser.
+2. Navigate to `http://localhost:3200` in your web browser.
 3. Register or login as a patient, doctor, or pharmacist.
 4. ... (Provide step-by-step instructions)
 

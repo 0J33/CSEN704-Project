@@ -65,7 +65,7 @@ function RegisterPharmacist() {
       
     
         // Send the request
-        fetch('http://localhost:3000/addPharmacist', {
+        fetch('http://localhost:3200/addPharmacist', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(credentials)

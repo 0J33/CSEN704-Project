@@ -8,7 +8,7 @@ function AdminAdmins() {
 
   useEffect(() => {
     // Fetching the list of admins from the server with axios
-    axios.get('http://localhost:3000/admins')
+    axios.get('http://localhost:3200/admins')
       .then(response => {
         setAdmins(response.data);
       })
@@ -27,7 +27,7 @@ function AdminAdmins() {
   // Handling adding a new admin
 
   const addAdmin = () => {
-    axios.post('http://localhost:3000/addAdmin', newAdmin)
+    axios.post('http://localhost:3200/addAdmin', newAdmin)
       .then(response => {
         setAdmins([...admins, newAdmin]);
         setShowModal(false);

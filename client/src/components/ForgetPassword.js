@@ -20,7 +20,7 @@ const ForgetPassword = () => {
 
     const requestOTP = async () => {
         try {
-            const response = await fetch('http://localhost:3000/resetPassword', {
+            const response = await fetch('http://localhost:3200/resetPassword', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -42,7 +42,7 @@ const ForgetPassword = () => {
 
     const verifyOTP = async () => {
         try {
-            const response = await fetch(`http://localhost:3000/checkOTP/${username}`, {
+            const response = await fetch(`http://localhost:3200/checkOTP/${username}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -63,7 +63,7 @@ const ForgetPassword = () => {
 
     const changePassword = async () => {
         try {
-            const response = await fetch('http://localhost:3000/changePassword', {
+            const response = await fetch('http://localhost:3200/changePassword', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -86,7 +86,7 @@ const ForgetPassword = () => {
 
     return (
         <>
-            <Button variant="primary" onClick={handleShow}>
+            <Button variant="primary" className="btn btn-primary" onClick={handleShow}>
                 Forget Password
             </Button>
 
