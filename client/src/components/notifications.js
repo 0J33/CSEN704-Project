@@ -25,7 +25,7 @@ function Notifications() {
 
     return (
         <>
-            <Button onClick={handleShowModal}>Notifications</Button>
+            <Button className='mb-1 mt-1 ms-1 me-1' onClick={handleShowModal}>Notifications</Button>
 
             <Modal show={showModal} onHide={handleCloseModal}>
                 <Modal.Header closeButton>

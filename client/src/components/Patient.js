@@ -165,17 +165,19 @@ function Patient() {
               <Nav.Link className='mb-1 mt-1 ms-1 me-1'  as={Link} to="/patient/medicines">Medicines</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Button onClick={() => setShowModalAddress(true)}>Manage My Addresses</Button>
-            </Nav.Item>
-            <Nav.Item>
-              <Button onClick={() => { setShowModalOrders(true); fetchOrders(); }}>Orders</Button>
-            </Nav.Item>
-            <Nav.Item>
               <Nav.Link className='mb-1 mt-1 ms-1 me-1'  as={Link} to="/patient/PatientPrescriptions">Prescriptions</Nav.Link>
             </Nav.Item>
-            
-            <Nav.Link className='mb-1 mt-1 ms-1 me-1'  as={Link} to="/patient/chat">Chat</Nav.Link>
-
+            <Nav.Item>
+              <Nav.Link className='mb-1 mt-1 ms-1 me-1'  as={Link} to="/patient/chat">Chat</Nav.Link>
+            </Nav.Item>
+            <br />
+            <Nav.Item>
+              <Button className='mb-1 mt-1 ms-1 me-1' onClick={() => setShowModalAddress(true)}>Manage My Addresses</Button>
+            </Nav.Item>
+            <Nav.Item>
+              <Button className='mb-1 mt-1 ms-1 me-1' onClick={() => { setShowModalOrders(true); fetchOrders(); }}>Orders</Button>
+            </Nav.Item>
+            <br />
             <ChangePassword></ChangePassword>
             <Logout> </Logout>
 
@@ -221,6 +223,7 @@ function Patient() {
                 required
               />
             </Form.Group>
+            <br />
             <Button type="submit">Add Address</Button>
           </Form>
           <br />

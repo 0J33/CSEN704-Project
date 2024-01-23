@@ -45,14 +45,17 @@ console.log(userRole);
 
       <div>
         <label htmlFor="month-input">Select Month: </label>
+        <br />
         <input
           id="month-input"
           type="month"
           value={month}
           onChange={(e) => setMonth(e.target.value)}
           placeholder="YYYY-MM"
+          className="form-control"
         />
-        <button onClick={fetchSalesReport}>Get Sales Report</button>
+        <br /><br />
+        <button className="btn btn-secondary" onClick={fetchSalesReport}>Get Sales Report</button>
       </div>
       {error && <div className="error">{error}</div>}
       {sales !== null && (

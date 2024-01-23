@@ -11,7 +11,7 @@ function Logout() {
         window.location.href='/';
     };
     return (
-        <Button variant="outline-danger" onClick={handleLogout}>Logout</Button>
+        <Button className='mb-1 mt-1 ms-1 me-1' variant="outline-danger" onClick={handleLogout}>Logout</Button>
     );
 }
 

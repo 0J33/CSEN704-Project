@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { ChatEngine } from 'react-chat-engine';
 import axios from 'axios';
 
+// TODO: make chat using db
+
 function Chat() {
     const projectID = '20b1b9d0-9120-42ae-a4b6-3a3080d2c79a';
     const [userType, setUserType] = useState('');
@@ -35,7 +37,7 @@ function Chat() {
     return (
         <div>
             <h1>Chat</h1>
-            <select onChange={handleUserChange} value={selectedUser}>
+            <select className="form-control" onChange={handleUserChange} value={selectedUser}>
                 <option value="">Select a {userType === 'doctor' ? 'Patient' : 'Doctor'}</option>
                 {chatUsers.map(user => (
                     <option key={user.id} value={user.username}>

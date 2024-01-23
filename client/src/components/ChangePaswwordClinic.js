@@ -45,7 +45,7 @@ const ChangePasswordClinic = () => {
 
     return (
         <>
-            <Button variant="primary" onClick={handleShow}>
+            <Button variant="primary" className='mb-1 mt-1 ms-1 me-1' onClick={handleShow}>
                 Change Password
             </Button>
 
