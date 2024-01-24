@@ -387,7 +387,7 @@ const fetchMedicines = () => {
           medicine.use.toLowerCase().includes(filter.toLowerCase())
         ).map(medicine => (
           <Card key={medicine._id} style={{ width: '18rem', flex: '0 0 auto' }}>
-            <Card.Img variant="top" src={medicine.picture} />
+            <Card.Img variant="top" src={`data:image/jpeg;base64,${btoa(String.fromCharCode(...new Uint8Array(medicine.picture.data)))}`} />
             <Card.Body>
               <Card.Title>{medicine.name}</Card.Title>
               <Card.Text>Price: ${medicine.price}</Card.Text>
