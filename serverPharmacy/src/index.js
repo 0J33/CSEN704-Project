@@ -1,7 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
-require("../../serverClinic/node_modules/dotenv/lib/main").config();
+require("dotenv").config();
 const MongoURI = process.env.MONGO_URI;
 const {addPatient, addPharmacist, addAdmin, removePharmacist, removePatient, getPendingPharmacists, getMedicines, addMedicine, editMedicine, getMedicineByName, getMedicineByUse, getPatientById, getPharmacistById, getAdmins, getPatients, getPharmacists, acceptPharmacist, rejectPharmacist, getUserId, getUserType, login, checkOTP, changePassword, resetPassword, addMedicineToCart, removeMedicineFromCart, changeMedicineQuantityInCart, createOrder, getCart, addAddress, getAddresses, payWithWallet, payWithCard, payWithCash, getOrder, getOrders, cancelOrder, checkWallet, archiveMedicine, unarchiveMedicine, getSalesReport, getSalesReportByMedicine, getSalesReportByDate, getSalesReportByMedicineAndDate, addPerscriptionToCart, getOrdersByPatient, getAlternativeMedicines, checkMedicinesStockHelper, getNotifications, sendMessage, getMessages, getChats} = require("./routes/controller");
 const bodyParser = require('body-parser');
