@@ -11,7 +11,7 @@ function PatientDoctors() {
   const [searchDate, setSearchDate] = useState('');
 
   useEffect(() => {
-    axios.get('http://localhost:3100/doctors')
+    axios.get(process.env.CLINIC_PORT + '/doctors')
       .then(response => {
         setDoctors(response.data);
       })
@@ -19,7 +19,7 @@ function PatientDoctors() {
         console.log(error);
       });
 
-    axios.get('http://localhost:3100/getPackageForPatient/65403bf85091f5dce661f3e8')
+    axios.get(process.env.CLINIC_PORT + '/getPackageForPatient/65403bf85091f5dce661f3e8')
       .then(response => {
         setPackage(response.data);
       })
@@ -31,7 +31,7 @@ function PatientDoctors() {
 
   useEffect(() => {
     if (searchDate) {
-      axios.get(`http://localhost:3100/getDoctorByDateTime/${searchDate}`)
+      axios.get(process.env.CLINIC_PORT + `/getDoctorByDateTime/${searchDate}`)
         .then(response => {
           setDoctors(response.data);
         })

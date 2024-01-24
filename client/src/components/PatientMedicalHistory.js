@@ -12,7 +12,7 @@ const PatientMedicalHistory = () => {
 
   const fetchHealthRecords = async () => {
     try {
-      const response = await fetch('http://localhost:3100/getHealthRecords/' + patientId); // Replace ':id' with actual patient ID
+      const response = await fetch(process.env.CLINIC_PORT + '/getHealthRecords/' + patientId); // Replace ':id' with actual patient ID
       const data = await response.json();
       setFiles(data);
     } catch (error) {
@@ -64,7 +64,7 @@ const PatientMedicalHistory = () => {
       const byteString = await fileToByteString(selectedFile);
 
       try {
-        await fetch('http://localhost:3100/uploadHealthRecord/' + patientId, { // Replace ':id' with actual patient ID
+        await fetch(process.env.CLINIC_PORT + '/uploadHealthRecord/' + patientId, { // Replace ':id' with actual patient ID
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ name: fileName, file: byteString })
@@ -78,7 +78,7 @@ const PatientMedicalHistory = () => {
 
   const handleRemove = async (recordName) => {
     try {
-      await fetch(`http://localhost:3100/removeHealthRecords/${patientId}/${recordName}`, { // Replace ':patientId' with actual patient ID
+      await fetch(process.env.CLINIC_PORT + `/removeHealthRecords/${patientId}/${recordName}`, { // Replace ':patientId' with actual patient ID
         method: 'GET',
       });
       fetchHealthRecords(); // Refresh the list after removal

@@ -33,7 +33,7 @@ function PatientPrescriptions() {
     doc.save(`prescription_${prescription._id}.pdf`);
   };
   useEffect(() => {
-    axios.get('http://localhost:3100/getPrescriptionsByPatient/' + localStorage.getItem('userId'))
+    axios.get(process.env.CLINIC_PORT + '/getPrescriptionsByPatient/' + localStorage.getItem('userId'))
       .then(response => {
         setPrescriptions(response.data);
         setFilteredPrescriptions(response.data);
@@ -80,7 +80,7 @@ function PatientPrescriptions() {
   };
 
   const handlePayment = ( paymentType) => {
-    axios.put(`http://localhost:3100/subscribePrescription/${localStorage.getItem('userId')}`, {
+    axios.put(process.env.CLINIC_PORT + `/subscribePrescription/${localStorage.getItem('userId')}`, {
       payable: 250,
       payment_type: paymentType
     })

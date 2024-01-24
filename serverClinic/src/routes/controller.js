@@ -1110,7 +1110,7 @@ const subscribePackage = async (req, res) => {
 
                 items.push(item);
 
-                fetch('http://localhost:3100/create-checkout-session', {
+                fetch(process.env.CLINIC_PORT + '/create-checkout-session', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -1179,7 +1179,7 @@ const subscribePres = async (req, res) => {
 
                 items.push(item);
 
-                fetch('http://localhost:3100/create-checkout-session', {
+                fetch(process.env.CLINIC_PORT + '/create-checkout-session', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -1304,7 +1304,7 @@ const selectAppointment = async (req, res) => {
 
                 items.push(item);
 
-                fetch('http://localhost:3100/create-checkout-session', {
+                fetch(process.env.CLINIC_PORT + '/create-checkout-session', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

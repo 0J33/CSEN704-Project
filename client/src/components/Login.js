@@ -20,7 +20,7 @@ function Login() {
         e.preventDefault();
     
         // Making a POST request to the server
-        fetch('http://localhost:3200/login', {
+        fetch(process.env.PHARMACY_PORT + '/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -52,7 +52,7 @@ function Login() {
 
     const loginClinic = () => {
         // Making a POST request to the server
-        fetch('http://localhost:3100/login', {
+        fetch(process.env.CLINIC_PORT + '/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

@@ -37,7 +37,7 @@ function PatientAppointments() {
 
   const handleScheduleFollowUp = () => {
     // Add logic to schedule follow-up appointment using backend endpoint
-    axios.post('http://localhost:3100/addAppointment', {
+    axios.post(process.env.CLINIC_PORT + '/addAppointment', {
       patient_id: userId,
       start_time: followUpDetails.start_time,
       end_time: followUpDetails.end_time,
@@ -63,7 +63,7 @@ function PatientAppointments() {
   }, []);
 
   const fetchAppointments = () => {
-    axios.get('http://localhost:3100/getAppointments')
+    axios.get(process.env.CLINIC_PORT + '/getAppointments')
       .then(response => {
         setAppointments(response.data);
         applyAllFilters(response.data);
@@ -74,7 +74,7 @@ function PatientAppointments() {
   };
 
   const fetchDoctors = () => {
-    axios.get('http://localhost:3100/doctors')
+    axios.get(process.env.CLINIC_PORT + '/doctors')
       .then(response => {
         setDoctors(response.data);
       })
@@ -128,7 +128,7 @@ function PatientAppointments() {
   };
 
   const handleCancelAppointment = (appointmentId) => {
-    axios.post(`http://localhost:3100/cancelAppointment/${appointmentId}`, {
+    axios.post(process.env.CLINIC_PORT + `/cancelAppointment/${appointmentId}`, {
       user: 'patient'
     })
       .then(response => {
@@ -146,7 +146,7 @@ function PatientAppointments() {
   };
 
   const handlePayment = (appointmentId, paymentType) => {
-    axios.put(`http://localhost:3100/selectAppointment/${localStorage.getItem('userId')}`, {
+    axios.put(process.env.CLINIC_PORT + `/selectAppointment/${localStorage.getItem('userId')}`, {
       appointment_id: appointmentId,
       payment_type: paymentType
     })
@@ -176,7 +176,7 @@ function PatientAppointments() {
   };
 
   const editAppointment = (appointmentId, status, newStartTime, newEndTime) => {
-    axios.put(`http://localhost:3100/editAppointment/${appointmentId}`, {
+    axios.put(process.env.CLINIC_PORT + `/editAppointment/${appointmentId}`, {
       // patient_id: rescheduleAppointment.patient_id,
       // doctor_id: localStorage.getItem('userId'),
       // date: newStartTime ? new Date(newStartTime).toISOString().split('T')[0] : new Date().toISOString().split('T')[0],

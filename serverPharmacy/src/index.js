@@ -81,8 +81,8 @@ app.post('/create-checkout-session', async (req, res) => {
             payment_method_types: ['card'],
             mode: 'payment',
             line_items: lineItems,
-            success_url: 'http://localhost:3001/patient/medicines',
-            cancel_url: 'http://localhost:3001/',
+            success_url: process.env.PHARMACY_PORT + '/patient/medicines',
+            cancel_url: process.env.PHARMACY_PORT + '/',
         });
 
         res.json({ url: session.url });

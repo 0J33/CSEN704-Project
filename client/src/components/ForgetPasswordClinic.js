@@ -20,7 +20,7 @@ const ForgetPasswordClinic = () => {
 
     const requestOTP = async () => {
         try {
-            const response = await fetch('http://localhost:3100/resetPassword', {
+            const response = await fetch(process.env.CLINIC_PORT + '/resetPassword', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -42,7 +42,7 @@ const ForgetPasswordClinic = () => {
 
     const verifyOTP = async () => {
         try {
-            const response = await fetch(`http://localhost:3100/checkOTP/${username}`, {
+            const response = await fetch(process.env.CLINIC_PORT + `/checkOTP/${username}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -63,7 +63,7 @@ const ForgetPasswordClinic = () => {
 
     const changePassword = async () => {
         try {
-            const response = await fetch('http://localhost:3100/changePassword', {
+            const response = await fetch(process.env.CLINIC_PORT + '/changePassword', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

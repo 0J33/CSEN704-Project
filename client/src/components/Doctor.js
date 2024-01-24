@@ -28,7 +28,7 @@ function Doctor() {
   const doctorId = localStorage.getItem('userId'); // Replace with actual doctor ID logic
 
   const handleAcceptContract = () => {
-    axios.post(`http://localhost:3100/acceptContract/${doctorId}`)
+    axios.post(process.env.CLINIC_PORT + `/acceptContract/${doctorId}`)
       .then(response => {
         console.log('Contract accepted:', response.data);
         // handle response

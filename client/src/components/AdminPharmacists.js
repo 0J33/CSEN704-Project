@@ -16,7 +16,7 @@ function AdminPharmacists() {
 
   useEffect(() => {
     if (filter === 'Existing') {
-      axios.get('http://localhost:3200/pharmacists')
+      axios.get(process.env.PHARMACY_PORT + '/pharmacists')
         .then(response => {
           setPharmacists(response.data);
         })
@@ -24,7 +24,7 @@ function AdminPharmacists() {
           console.log(error);
         });
     } else {
-      axios.get('http://localhost:3200/getPendingPharmacists')
+      axios.get(process.env.PHARMACY_PORT + '/getPendingPharmacists')
         .then(response => {
           setPendingPharmacists(response.data);
         })
@@ -40,7 +40,7 @@ function AdminPharmacists() {
   };
 
   const deletePharmacist = () => {
-    axios.delete(`http://localhost:3200/removePharmacist/${pharmacistToDelete}`)
+    axios.delete(process.env.PHARMACY_PORT + `/removePharmacist/${pharmacistToDelete}`)
       .then(() => {
         setPharmacists(pharmacists.filter(pharmacist => pharmacist._id !== pharmacistToDelete));
         setShowConfirmationModal(false);
@@ -53,7 +53,7 @@ function AdminPharmacists() {
 
 
   const acceptPharmacist = (pharmacistId) => {
-    axios.put(`http://localhost:3200/acceptPharmacist/${pharmacistId}`)
+    axios.put(process.env.PHARMACY_PORT + `/acceptPharmacist/${pharmacistId}`)
       .then(() => {
         setPendingPharmacists(pendingPharmacists.filter(pharmacist => pharmacist._id !== pharmacistId));
         setSuccessMessage('Pharmacist accepted successfully');
@@ -63,7 +63,7 @@ function AdminPharmacists() {
   };
 
   const rejectPharmacist = (pharmacistId) => {
-    axios.put(`http://localhost:3200/rejectPharmacist/${pharmacistId}`)
+    axios.put(process.env.PHARMACY_PORT + `/rejectPharmacist/${pharmacistId}`)
       .then(() => {
         setPendingPharmacists(pendingPharmacists.filter(pharmacist => pharmacist._id !== pharmacistId));
         setSuccessMessage('Pharmacist rejected successfully');

@@ -75,8 +75,8 @@ app.post('/create-checkout-session', async (req, res) => {
             payment_method_types: ['card'],
             mode: 'payment',
             line_items: lineItems,
-            success_url: 'http://localhost:3001/patient-clinic/appointments',
-            cancel_url: 'http://localhost:3001/patient-clinic/appointments',
+            success_url: process.env.CLINIC_PORT + '/patient-clinic/appointments',
+            cancel_url: process.env.CLINIC_PORT + '/patient-clinic/appointments',
         });
 
         res.json({ url: session.url });

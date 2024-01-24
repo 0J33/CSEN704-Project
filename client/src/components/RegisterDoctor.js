@@ -68,7 +68,7 @@ function RegisterDoctor() {
 
        // console.log(JSON.stringify(credentials))
 
-        fetch('http://localhost:3100/addDoctor', {
+        fetch(process.env.CLINIC_PORT + '/addDoctor', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

@@ -13,7 +13,7 @@ function AdminDoctors() {
 
   useEffect(() => {
     if (filter === 'Existing') {
-      axios.get('http://localhost:3100/doctors')
+      axios.get(process.env.CLINIC_PORT + '/doctors')
         .then(response => {
           setDoctors(response.data);
         })
@@ -21,7 +21,7 @@ function AdminDoctors() {
           console.log(error);
         });
     } else {
-      axios.get('http://localhost:3100/getPendingDoctors')
+      axios.get(process.env.CLINIC_PORT + '/getPendingDoctors')
         .then(response => {
           setPendingDoctors(response.data);
         })
@@ -37,7 +37,7 @@ function AdminDoctors() {
   };
 
   const deleteDoctor = () => {
-    axios.delete(`http://localhost:3100/removeDoctor/${doctorToDelete}`)
+    axios.delete(process.env.CLINIC_PORT + `/removeDoctor/${doctorToDelete}`)
       .then(() => {
         setDoctors(doctors.filter(doctor => doctor._id !== doctorToDelete));
         setShowConfirmationModal(false);
@@ -52,7 +52,7 @@ function AdminDoctors() {
   const acceptDoctor = (event, doctorId) => {
     event.stopPropagation(); // This stops the event from propagating to the row click handler
 
-    axios.put(`http://localhost:3100/acceptDoctor/${doctorId}`)
+    axios.put(process.env.CLINIC_PORT + `/acceptDoctor/${doctorId}`)
       .then(() => {
         // Update the UI accordingly, e.g., remove the doctor from pendingDoctors
         setPendingDoctors(pendingDoctors.filter(doctor => doctor._id !== doctorId));
@@ -65,7 +65,7 @@ function AdminDoctors() {
   const rejectDoctor = (event, doctorId) => {
     event.stopPropagation(); // This stops the event from propagating to the row click handler
 
-    axios.put(`http://localhost:3100/rejectDoctor/${doctorId}`)
+    axios.put(process.env.CLINIC_PORT + `/rejectDoctor/${doctorId}`)
       .then(() => {
         // Update the UI accordingly, e.g., remove the doctor from pendingDoctors
         setPendingDoctors(pendingDoctors.filter(doctor => doctor._id !== doctorId));

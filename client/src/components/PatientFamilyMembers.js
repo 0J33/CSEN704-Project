@@ -9,7 +9,7 @@ function PatientFamilyMembers() {
 
   const fetchFamilyMembers = () => {
     // Replace with your actual API endpoint
-    axios.get('http://localhost:3100/getFamilyMembers/' + localStorage.getItem('userId'))
+    axios.get(process.env.CLINIC_PORT + '/getFamilyMembers/' + localStorage.getItem('userId'))
       .then(response => {
         setFamilyMembers(response.data);
       })
@@ -24,7 +24,7 @@ function PatientFamilyMembers() {
     const familyMemberData = Object.fromEntries(formData.entries());
 
     if (currentFamilyMember) {
-      axios.put(`http://localhost:3100/editFamilyMember/${currentFamilyMember._id}`, familyMemberData)
+      axios.put(process.env.CLINIC_PORT + `/editFamilyMember/${currentFamilyMember._id}`, familyMemberData)
         .then(() => {
           fetchFamilyMembers();
           setShowModal(false);
@@ -34,7 +34,7 @@ function PatientFamilyMembers() {
         });
     } else {
       console.log(familyMemberData);
-      axios.post('http://localhost:3100/addFamilyMember/'+localStorage.getItem('userId'), familyMemberData)
+      axios.post(process.env.CLINIC_PORT + '/addFamilyMember/'+localStorage.getItem('userId'), familyMemberData)
         .then(() => {
           fetchFamilyMembers();
           setShowModal(false);

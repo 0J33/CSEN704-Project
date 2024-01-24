@@ -11,7 +11,7 @@ function Notifications() {
     }, []);
 
     const fetchNotifications = () => {
-        axios.get('http://localhost:3200/getMedNotifications')
+        axios.get(process.env.PHARMACY_PORT + '/getMedNotifications')
             .then(response => {
                 setNotifications(response.data);
             })

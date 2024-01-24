@@ -14,7 +14,7 @@ function AdminPatients() {
 
   useEffect(() => {
     // Fetching the list of patients from the server with axios
-    axios.get('http://localhost:3200/patients')
+    axios.get(process.env.PHARMACY_PORT + '/patients')
       .then(response => {
         setPatients(response.data);
       })
@@ -31,7 +31,7 @@ function AdminPatients() {
 
   // Function to actually delete the patient
   const deletePatient = () => {
-    axios.delete(`http://localhost:3200/removePatient/${patientToDelete}`)
+    axios.delete(process.env.PHARMACY_PORT + `/removePatient/${patientToDelete}`)
       .then(() => {
         setPatients(patients.filter(patient => patient._id !== patientToDelete));
         setShowConfirmationModal(false);

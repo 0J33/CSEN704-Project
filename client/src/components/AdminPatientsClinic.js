@@ -9,7 +9,7 @@ function AdminPatientsClinic() {
   const [patientToDelete, setPatientToDelete] = useState(null);
 
   useEffect(() => {
-    axios.get('http://localhost:3100/patients')
+    axios.get(process.env.CLINIC_PORT + '/patients')
       .then(response => {
         setPatients(response.data);
       })
@@ -24,7 +24,7 @@ function AdminPatientsClinic() {
   };
 
   const deletePatient = () => {
-    axios.delete(`http://localhost:3100/removePatient/${patientToDelete}`)
+    axios.delete(process.env.CLINIC_PORT + `/removePatient/${patientToDelete}`)
       .then(() => {
         setPatients(patients.filter(patient => patient._id !== patientToDelete));
         setShowConfirmationModal(false);

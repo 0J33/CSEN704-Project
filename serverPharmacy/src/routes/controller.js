@@ -639,7 +639,7 @@ const payWithCard = async (req, res) => {
         const order = await orderModel.findById(id);
         const items = order.items;
 
-        fetch('http://localhost:3200/create-checkout-session', {
+        fetch(process.env.PHARMACY_PORT + '/create-checkout-session', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

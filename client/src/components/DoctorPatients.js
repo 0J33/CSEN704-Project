@@ -38,7 +38,7 @@ function DoctorPatients() {
   const handleScheduleAppointment = async () => {
     if (selectedPatient && appointmentDetails.startTime && appointmentDetails.endTime) {
       try {
-        const response = await axios.post('http://localhost:3100/addAppointment', {
+        const response = await axios.post(process.env.CLINIC_PORT + '/addAppointment', {
           patient_id: selectedPatient._id,
           doctor_id: localStorage.getItem('userId'),
           date: Date.now(),
@@ -55,7 +55,7 @@ function DoctorPatients() {
   };
 
   const fetchPatients = () => {
-    axios.get('http://localhost:3100/getPatientsByAppointments/' + localStorage.getItem('userId'))
+    axios.get(process.env.CLINIC_PORT + '/getPatientsByAppointments/' + localStorage.getItem('userId'))
       .then(response => {
         //remove duplicate patient username
         
@@ -94,7 +94,7 @@ function DoctorPatients() {
   const handleDocumentsClick = async (patientId) => {
     setSelectedPatient(patientId);
     try {
-      const response = await axios.get(`http://localhost:3100/getHealthRecords/${patientId}`);
+      const response = await axios.get(process.env.CLINIC_PORT + `/getHealthRecords/${patientId}`);
       setFiles(response.data);
       setShowDocumentsModal(true);
     } catch (error) {
@@ -128,7 +128,7 @@ function DoctorPatients() {
       const byteString = await fileToByteString(selectedFile);
 
       try {
-        await axios.post(`http://localhost:3100/uploadHealthRecord/${selectedPatient}`, {
+        await axios.post(process.env.CLINIC_PORT + `/uploadHealthRecord/${selectedPatient}`, {
           name: fileName,
           file: byteString
         });
@@ -141,7 +141,7 @@ function DoctorPatients() {
 
   const handleRemove = async (recordName) => {
     try {
-      await axios.get(`http://localhost:3100/removeHealthRecords/${selectedPatient}/${recordName}`);
+      await axios.get(process.env.CLINIC_PORT + `/removeHealthRecords/${selectedPatient}/${recordName}`);
       fetchDocuments(selectedPatient); // Refresh the list after removal
     } catch (error) {
       console.error('Error removing file:', error);
@@ -167,7 +167,7 @@ function DoctorPatients() {
   const fetchDocuments = async (patientId) => {
     console.log(patientId);
     try {
-      const response = await axios.get(`http://localhost:3100/getHealthRecords/${patientId}`);
+      const response = await axios.get(process.env.CLINIC_PORT + `/getHealthRecords/${patientId}`);
       setFiles(response.data);
     } catch (error) {
       console.error('Error fetching documents:', error);
@@ -175,7 +175,7 @@ function DoctorPatients() {
   };
 
   const filterUpcomingAppointments = () => {
-    axios.get('http://localhost:3100/getPatientsByUpcomingAppointments/' + localStorage.getItem('userId'))
+    axios.get(process.env.CLINIC_PORT + '/getPatientsByUpcomingAppointments/' + localStorage.getItem('userId'))
       .then(response => {
         setFilteredPatients(response.data);
       })

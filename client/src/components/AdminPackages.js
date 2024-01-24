@@ -13,7 +13,7 @@ function AdminPackages() {
   }, []);
 
   const fetchPackages = () => {
-    axios.get('http://localhost:3100/packages')
+    axios.get(process.env.CLINIC_PORT + '/packages')
       .then(response => {
         setPackages(response.data);
       })
@@ -28,7 +28,7 @@ function AdminPackages() {
     const packageData = Object.fromEntries(formData.entries());
 
     if (isEdit) {
-      axios.put(`http://localhost:3100/editPackage/${currentPackage._id}`, packageData)
+      axios.put(process.env.CLINIC_PORT + `/editPackage/${currentPackage._id}`, packageData)
         .then(() => {
           fetchPackages();
           setShowModal(false);
@@ -37,7 +37,7 @@ function AdminPackages() {
           console.log(error);
         });
     } else {
-      axios.post('http://localhost:3100/addPackage', packageData)
+      axios.post(process.env.CLINIC_PORT + '/addPackage', packageData)
         .then(() => {
           fetchPackages();
           setShowModal(false);
@@ -49,7 +49,7 @@ function AdminPackages() {
   };
 
   const handleDelete = (packageId) => {
-    axios.delete(`http://localhost:3100/removePackage/${packageId}`)
+    axios.delete(process.env.CLINIC_PORT + `/removePackage/${packageId}`)
       .then(() => {
         fetchPackages();
       })

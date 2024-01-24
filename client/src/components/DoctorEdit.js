@@ -15,7 +15,7 @@ function DoctorEdit() {
   const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
-    axios.get(`http://localhost:3100/getDoctorById/${doctorId}`)
+    axios.get(process.env.CLINIC_PORT + `/getDoctorById/${doctorId}`)
       .then(response => {
         setDoctorInfo(response.data);
       })
@@ -30,7 +30,7 @@ function DoctorEdit() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.put(`http://localhost:3100/editDoctorDetails/${doctorId}`, doctorInfo)
+    axios.put(process.env.CLINIC_PORT + `/editDoctorDetails/${doctorId}`, doctorInfo)
       .then(() => {
         setSuccessMessage('Doctor information updated successfully!');
       })

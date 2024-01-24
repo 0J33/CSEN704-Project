@@ -57,7 +57,7 @@ function DoctorPrescriptions() {
 
   const handleUpdatePrescription = () => {
     const doctorId = localStorage.getItem('userId');
-    axios.put(`http://localhost:3100/editPrescription/${editingPrescription._id}`, {
+    axios.put(process.env.CLINIC_PORT + `/editPrescription/${editingPrescription._id}`, {
       medicines: medicineList,
       doctor_id: doctorId,
       patient_id: selectedPatient,
@@ -76,7 +76,7 @@ function DoctorPrescriptions() {
   };
 
   const handleRemovePrescription = (prescriptionId) => {
-    axios.delete(`http://localhost:3100/removePrescription/${prescriptionId}`)
+    axios.delete(process.env.CLINIC_PORT + `/removePrescription/${prescriptionId}`)
       .then(response => {
         alert('Prescription deleted successfully!');
         fetchPrescriptions();
@@ -88,7 +88,7 @@ function DoctorPrescriptions() {
   };
 
   const fetchPrescriptions = () => {
-    axios.get('http://localhost:3100/getPrescriptionsByDoctor/' + localStorage.getItem('userId'))
+    axios.get(process.env.CLINIC_PORT + '/getPrescriptionsByDoctor/' + localStorage.getItem('userId'))
       .then(response => {
         setPrescriptions(response.data);
         setFilteredPrescriptions(response.data);
@@ -100,7 +100,7 @@ function DoctorPrescriptions() {
   }
 
   const fetchPatients = () => {
-    axios.get('http://localhost:3100/patients')
+    axios.get(process.env.CLINIC_PORT + '/patients')
       .then(response => {
         setPatients(response.data);
       })
@@ -110,7 +110,7 @@ function DoctorPrescriptions() {
   };
 
   const fetchMedicines = () => {
-    axios.get('http://localhost:3200/medicines')
+    axios.get(process.env.PHARMACY_PORT + '/medicines')
       .then(response => {
         setMedicines(response.data);
       })
@@ -146,7 +146,7 @@ function DoctorPrescriptions() {
       file: '' // Assuming no file to attach
     };
 
-    axios.post('http://localhost:3100/addPrescription', data)
+    axios.post(process.env.CLINIC_PORT + '/addPrescription', data)
       .then(response => {
         alert('Prescription created successfully!');
         setShowAddPrescriptionModal(false);
