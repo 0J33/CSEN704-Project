@@ -85,6 +85,10 @@ app.post('/create-checkout-session', async (req, res) => {
     }
 });
 
+app.get("/", (req, res) => {
+    res.send("Clinic server is running!");
+});
+
 app.post("/addPatient", addPatient);
 app.post('/addDoctor', addDoctor);
 app.post('/addAdmin', addAdmin);

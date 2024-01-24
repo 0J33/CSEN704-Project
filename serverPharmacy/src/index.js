@@ -91,6 +91,10 @@ app.post('/create-checkout-session', async (req, res) => {
     }
 });
 
+app.get("/", (req, res) => {
+    res.send("Pharmacy server is running!");
+});
+
 app.post("/addPatient", addPatient);
 app.post("/addPharmacist", addPharmacist);
 app.post("/addAdmin", addAdmin);
