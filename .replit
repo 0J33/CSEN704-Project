@@ -1,1 +1,0 @@
-run = "cd serverClinic && npm start && cd ../serverPharmacy && npm start"
