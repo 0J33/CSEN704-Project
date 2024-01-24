@@ -1110,7 +1110,9 @@ const subscribePackage = async (req, res) => {
 
                 items.push(item);
 
-                fetch(process.env.REACT_APP_CLINIC_ENV + '/create-checkout-session', {
+                const checkout_session = `${process.env.REACT_APP_CLINIC_ENV}/create-checkout-session`;
+
+                fetch(checkout_session, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -1179,7 +1181,9 @@ const subscribePres = async (req, res) => {
 
                 items.push(item);
 
-                fetch(process.env.REACT_APP_CLINIC_ENV + '/create-checkout-session', {
+                const checkout_session = `${process.env.REACT_APP_CLINIC_ENV}/create-checkout-session`;
+
+                fetch(checkout_session, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -1303,8 +1307,10 @@ const selectAppointment = async (req, res) => {
                 };
 
                 items.push(item);
+                
+                const checkout_session = `${process.env.REACT_APP_CLINIC_ENV}/create-checkout-session`;
 
-                fetch(process.env.REACT_APP_CLINIC_ENV + '/create-checkout-session', {
+                fetch(checkout_session, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
