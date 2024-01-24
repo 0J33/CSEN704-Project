@@ -20,7 +20,7 @@ function Login() {
         e.preventDefault();
     
         // Making a POST request to the server
-        fetch(process.env.PHARMACY_PORT + '/login', {
+        fetch(process.env.REACT_APP_PHARMACY_ENV + '/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -51,8 +51,9 @@ function Login() {
     };
 
     const loginClinic = () => {
+        console.log("All environment variables:", process.env);
         // Making a POST request to the server
-        fetch(process.env.CLINIC_PORT + '/login', {
+        fetch(process.env.REACT_APP_CLINIC_ENV + '/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

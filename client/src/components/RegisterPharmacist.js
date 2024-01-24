@@ -65,7 +65,7 @@ function RegisterPharmacist() {
       
     
         // Send the request
-        fetch(process.env.PHARMACY_PORT + '/addPharmacist', {
+        fetch(process.env.REACT_APP_PHARMACY_ENV + '/addPharmacist', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(credentials)

@@ -11,7 +11,7 @@ function Notifications() {
     }, []);
 
     const fetchNotifications = () => {
-        axios.get(process.env.PHARMACY_PORT + '/getMedNotifications')
+        axios.get(process.env.REACT_APP_PHARMACY_ENV + '/getMedNotifications')
             .then(response => {
                 setNotifications(response.data);
             })

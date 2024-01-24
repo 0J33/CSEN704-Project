@@ -31,7 +31,7 @@ function Pharmacist() {
 
   const fetchWalletBalance = () => {
     // Replace with the correct API endpoint and make sure to handle the response correctly
-    axios.get(process.env.PHARMACY_PORT + `/checkWallet/${pharmacistid}`)
+    axios.get(process.env.REACT_APP_PHARMACY_ENV + `/checkWallet/${pharmacistid}`)
       .then(response => {
         setWalletBalance(response.data); // Assuming 'amount' is the field in the response
       })

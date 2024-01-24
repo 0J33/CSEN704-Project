@@ -35,7 +35,7 @@ const toggleArchived = () => {
 
 // Modify the handleArchiveMedicine function to update the state
 const handleArchiveMedicine = (medicineId) => {
-  axios.put(process.env.PHARMACY_PORT + `/archiveMedicine/${medicineId}`)
+  axios.put(process.env.REACT_APP_PHARMACY_ENV + `/archiveMedicine/${medicineId}`)
     .then(() => {
       setMedicines(prevMedicines =>
         prevMedicines.map(med => 
@@ -49,7 +49,7 @@ const handleArchiveMedicine = (medicineId) => {
 
 // Modify the handleUnarchiveMedicine function to update the state
 const handleUnarchiveMedicine = (medicineId) => {
-  axios.put(process.env.PHARMACY_PORT + `/unarchiveMedicine/${medicineId}`)
+  axios.put(process.env.REACT_APP_PHARMACY_ENV + `/unarchiveMedicine/${medicineId}`)
     .then(() => {
       setMedicines(prevMedicines =>
         prevMedicines.map(med => 
@@ -63,7 +63,7 @@ const handleUnarchiveMedicine = (medicineId) => {
 
 
   const fetchAddresses = () => {
-    axios.get(process.env.PHARMACY_PORT + `/getAddresses/${patientId}`)
+    axios.get(process.env.REACT_APP_PHARMACY_ENV + `/getAddresses/${patientId}`)
       .then(response => {
         setAddresses(response.data);
         if (response.data.length > 0) {
@@ -78,7 +78,7 @@ const handleUnarchiveMedicine = (medicineId) => {
       alert('Please add an address first.');
       return;
     }
-    axios.post(process.env.PHARMACY_PORT + `/createOrder/${patientId}`, { address: selectedAddress, payment_method: paymentMethod })
+    axios.post(process.env.REACT_APP_PHARMACY_ENV + `/createOrder/${patientId}`, { address: selectedAddress, payment_method: paymentMethod })
       .then(response => {
         setOrderId(response.data.order_id);
         // Proceed to payment after order is created
@@ -87,7 +87,7 @@ const handleUnarchiveMedicine = (medicineId) => {
   };
 
   const payWithWallet = () => {
-    axios.post(process.env.PHARMACY_PORT + `/payWithWallet/${patientId}`, { order_id: orderId })
+    axios.post(process.env.REACT_APP_PHARMACY_ENV + `/payWithWallet/${patientId}`, { order_id: orderId })
       .then(response => {
         console.log(response.data.message);
         // Handle successful payment
@@ -96,7 +96,7 @@ const handleUnarchiveMedicine = (medicineId) => {
   };
 
   const payWithCard = () => {
-    axios.post(process.env.PHARMACY_PORT + `/payWithCard/${orderId}`)
+    axios.post(process.env.REACT_APP_PHARMACY_ENV + `/payWithCard/${orderId}`)
       .then(response => {
         window.location = response.data.url; // Redirect to payment gateway
       })
@@ -104,7 +104,7 @@ const handleUnarchiveMedicine = (medicineId) => {
   };
 
   const payWithCash = () => {
-    axios.post(process.env.PHARMACY_PORT + `/payWithCash/${orderId}`)
+    axios.post(process.env.REACT_APP_PHARMACY_ENV + `/payWithCash/${orderId}`)
       .then(response => {
         console.log(response.data.message);
         // Handle successful payment
@@ -140,7 +140,7 @@ const handleUnarchiveMedicine = (medicineId) => {
 
   // Adjust the fetchMedicines function to handle the 'archived' field, if necessary
 const fetchMedicines = () => {
-  axios.get(process.env.PHARMACY_PORT + '/medicines')
+  axios.get(process.env.REACT_APP_PHARMACY_ENV + '/medicines')
     .then(response => {
       // Assuming the response will have a field 'archived' to indicate the status
       setMedicines(response.data.map(med => ({ ...med, archived: !!med.archived })));
@@ -149,7 +149,7 @@ const fetchMedicines = () => {
 };
 
   const fetchCart = () => {
-    axios.get(process.env.PHARMACY_PORT + `/getCart/${patientId}`)
+    axios.get(process.env.REACT_APP_PHARMACY_ENV + `/getCart/${patientId}`)
       .then(response => {
         setCart(response.data);
         calculateTotal(response.data);
@@ -170,12 +170,12 @@ const fetchMedicines = () => {
     const existingItem = cart.find(item => item.medicine._id === medicineId);
     if (existingItem) {
       // Update quantity if already in cart
-      axios.post(process.env.PHARMACY_PORT + `/updateCart/${patientId}`, { medicine: medicineId, quantity: existingItem.quantity + 1 })
+      axios.post(process.env.REACT_APP_PHARMACY_ENV + `/updateCart/${patientId}`, { medicine: medicineId, quantity: existingItem.quantity + 1 })
         .then(() => fetchCart())
         .catch(error => console.error('Error updating cart:', error));
     } else {
       // Add new item to cart
-      axios.post(process.env.PHARMACY_PORT + `/addMedicineToCart/${patientId}`, { medicine: medicineId, quantity: 1 })
+      axios.post(process.env.REACT_APP_PHARMACY_ENV + `/addMedicineToCart/${patientId}`, { medicine: medicineId, quantity: 1 })
         .then(() => fetchCart())
         .catch(error => console.error('Error adding medicine to cart:', error));
     }
@@ -183,7 +183,7 @@ const fetchMedicines = () => {
 
   // Function to remove medicine from cart
   const removeFromCart = (medicineId) => {
-    axios.delete(process.env.PHARMACY_PORT + `/removeMedicineFromCart/${patientId}`, { data: { medicine: medicineId } })
+    axios.delete(process.env.REACT_APP_PHARMACY_ENV + `/removeMedicineFromCart/${patientId}`, { data: { medicine: medicineId } })
       .then(() => fetchCart())
       .catch(error => console.error('Error removing medicine from cart:', error));
   };
@@ -214,7 +214,7 @@ const fetchMedicines = () => {
 };
 
   const handleAddMedicine = (medicineData) => {
-    axios.post(process.env.PHARMACY_PORT + '/addMedicine', medicineData)
+    axios.post(process.env.REACT_APP_PHARMACY_ENV + '/addMedicine', medicineData)
       .then(() => {
         fetchMedicines();
         setShowModal(false);
@@ -223,7 +223,7 @@ const fetchMedicines = () => {
   };
 
   const handleEditMedicine = (id, medicineData) => {
-    axios.put(process.env.PHARMACY_PORT + `/editMedicine/${id}`, medicineData)
+    axios.put(process.env.REACT_APP_PHARMACY_ENV + `/editMedicine/${id}`, medicineData)
       .then(() => {
         fetchMedicines();
         setShowModal(false);
@@ -278,7 +278,7 @@ const fetchMedicines = () => {
   };
 
   const handleCartChange = (medicineId, change) => {
-    axios.put(process.env.PHARMACY_PORT + `/changeMedicineQuantityInCart/${patientId}`, { medicine: medicineId, quantity: change })
+    axios.put(process.env.REACT_APP_PHARMACY_ENV + `/changeMedicineQuantityInCart/${patientId}`, { medicine: medicineId, quantity: change })
       .then(() => fetchCart())
       .catch(error => console.error('Error updating cart:', error));
   };

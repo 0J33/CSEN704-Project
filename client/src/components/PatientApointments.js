@@ -37,7 +37,7 @@ function PatientAppointments() {
 
   const handleScheduleFollowUp = () => {
     // Add logic to schedule follow-up appointment using backend endpoint
-    axios.post(process.env.CLINIC_PORT + '/addAppointment', {
+    axios.post(process.env.REACT_APP_CLINIC_ENV + '/addAppointment', {
       patient_id: userId,
       start_time: followUpDetails.start_time,
       end_time: followUpDetails.end_time,
@@ -63,7 +63,7 @@ function PatientAppointments() {
   }, []);
 
   const fetchAppointments = () => {
-    axios.get(process.env.CLINIC_PORT + '/getAppointments')
+    axios.get(process.env.REACT_APP_CLINIC_ENV + '/getAppointments')
       .then(response => {
         setAppointments(response.data);
         applyAllFilters(response.data);
@@ -74,7 +74,7 @@ function PatientAppointments() {
   };
 
   const fetchDoctors = () => {
-    axios.get(process.env.CLINIC_PORT + '/doctors')
+    axios.get(process.env.REACT_APP_CLINIC_ENV + '/doctors')
       .then(response => {
         setDoctors(response.data);
       })
@@ -128,7 +128,7 @@ function PatientAppointments() {
   };
 
   const handleCancelAppointment = (appointmentId) => {
-    axios.post(process.env.CLINIC_PORT + `/cancelAppointment/${appointmentId}`, {
+    axios.post(process.env.REACT_APP_CLINIC_ENV + `/cancelAppointment/${appointmentId}`, {
       user: 'patient'
     })
       .then(response => {
@@ -146,7 +146,7 @@ function PatientAppointments() {
   };
 
   const handlePayment = (appointmentId, paymentType) => {
-    axios.put(process.env.CLINIC_PORT + `/selectAppointment/${localStorage.getItem('userId')}`, {
+    axios.put(process.env.REACT_APP_CLINIC_ENV + `/selectAppointment/${localStorage.getItem('userId')}`, {
       appointment_id: appointmentId,
       payment_type: paymentType
     })
@@ -176,7 +176,7 @@ function PatientAppointments() {
   };
 
   const editAppointment = (appointmentId, status, newStartTime, newEndTime) => {
-    axios.put(process.env.CLINIC_PORT + `/editAppointment/${appointmentId}`, {
+    axios.put(process.env.REACT_APP_CLINIC_ENV + `/editAppointment/${appointmentId}`, {
       // patient_id: rescheduleAppointment.patient_id,
       // doctor_id: localStorage.getItem('userId'),
       // date: newStartTime ? new Date(newStartTime).toISOString().split('T')[0] : new Date().toISOString().split('T')[0],

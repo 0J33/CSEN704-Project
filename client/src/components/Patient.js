@@ -39,7 +39,7 @@ function Patient() {
 
   const fetchWalletBalance = () => {  
     // Replace with the correct API endpoint and make sure to handle the response correctly
-    axios.get(process.env.PHARMACY_PORT + `/checkWallet/${patientId}`)
+    axios.get(process.env.REACT_APP_PHARMACY_ENV + `/checkWallet/${patientId}`)
       .then(response => {
         setWalletBalance(response.data); // Assuming 'amount' is the field in the response
       })
@@ -50,7 +50,7 @@ function Patient() {
 
 
   const fetchOrders = () => {
-    axios.get(process.env.PHARMACY_PORT + `/getOrders/${patientId}`)
+    axios.get(process.env.REACT_APP_PHARMACY_ENV + `/getOrders/${patientId}`)
       .then(response => {
         setOrders(response.data);
       })
@@ -58,7 +58,7 @@ function Patient() {
   };
 
   const cancelOrder = (orderId) => {
-    axios.put(process.env.PHARMACY_PORT + `/cancelOrder/${orderId}`)
+    axios.put(process.env.REACT_APP_PHARMACY_ENV + `/cancelOrder/${orderId}`)
       .then(() => {
         fetchOrders(); // Refresh the orders list
       })
@@ -91,7 +91,7 @@ function Patient() {
 
     const fetchNotifications = async () => {
       try {
-        const response = await axios.get(process.env.PHARMACY_PORT + `/getMedNotifications`); // Replace with your actual API endpoint
+        const response = await axios.get(process.env.REACT_APP_PHARMACY_ENV + `/getMedNotifications`); // Replace with your actual API endpoint
         setNotifications(response.data);
       } catch (error) {
         console.error('Error fetching notifications:', error);
@@ -106,7 +106,7 @@ function Patient() {
 
 
   const fetchAddresses = () => {
-    axios.get(process.env.PHARMACY_PORT + `/getAddresses/${patientId}`)
+    axios.get(process.env.REACT_APP_PHARMACY_ENV + `/getAddresses/${patientId}`)
       .then(response => {
         setAddresses(response.data);
       })
@@ -114,7 +114,7 @@ function Patient() {
   };
 
   const handleAddAddress = () => {
-    axios.post(process.env.PHARMACY_PORT + `/addAddress/${patientId}`, { address: newAddress })
+    axios.post(process.env.REACT_APP_PHARMACY_ENV + `/addAddress/${patientId}`, { address: newAddress })
       .then(() => {
         fetchAddresses(); // Fetch addresses again to update the list
         setNewAddress(''); // Reset new address input

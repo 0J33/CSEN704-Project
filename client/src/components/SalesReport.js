@@ -12,7 +12,7 @@ const SalesReport = () => {
   const fetchSalesReport = async () => {
   try {
     // Assuming your backend function is expecting just the month in 'YYYY-MM' format 
-    const response = await axios.get(process.env.PHARMACY_PORT + `/getSalesReport/${month}`);
+    const response = await axios.get(process.env.REACT_APP_PHARMACY_ENV + `/getSalesReport/${month}`);
     
     setSales(response.data);
     setError('');
@@ -26,7 +26,7 @@ const SalesReport = () => {
 
 const fetchSalesReportByMedicineDate = async () => {
   try {
-    const response = await axios.get(process.env.PHARMACY_PORT + `/getSalesReportByMedicine/${month}/${medicine}`);
+    const response = await axios.get(process.env.REACT_APP_PHARMACY_ENV + `/getSalesReportByMedicine/${month}/${medicine}`);
     setSales(response.data);
     setError('');
   } catch (error) {

@@ -57,7 +57,7 @@ function DoctorPrescriptions() {
 
   const handleUpdatePrescription = () => {
     const doctorId = localStorage.getItem('userId');
-    axios.put(process.env.CLINIC_PORT + `/editPrescription/${editingPrescription._id}`, {
+    axios.put(process.env.REACT_APP_CLINIC_ENV + `/editPrescription/${editingPrescription._id}`, {
       medicines: medicineList,
       doctor_id: doctorId,
       patient_id: selectedPatient,
@@ -76,7 +76,7 @@ function DoctorPrescriptions() {
   };
 
   const handleRemovePrescription = (prescriptionId) => {
-    axios.delete(process.env.CLINIC_PORT + `/removePrescription/${prescriptionId}`)
+    axios.delete(process.env.REACT_APP_CLINIC_ENV + `/removePrescription/${prescriptionId}`)
       .then(response => {
         alert('Prescription deleted successfully!');
         fetchPrescriptions();
@@ -88,7 +88,7 @@ function DoctorPrescriptions() {
   };
 
   const fetchPrescriptions = () => {
-    axios.get(process.env.CLINIC_PORT + '/getPrescriptionsByDoctor/' + localStorage.getItem('userId'))
+    axios.get(process.env.REACT_APP_CLINIC_ENV + '/getPrescriptionsByDoctor/' + localStorage.getItem('userId'))
       .then(response => {
         setPrescriptions(response.data);
         setFilteredPrescriptions(response.data);
@@ -100,7 +100,7 @@ function DoctorPrescriptions() {
   }
 
   const fetchPatients = () => {
-    axios.get(process.env.CLINIC_PORT + '/patients')
+    axios.get(process.env.REACT_APP_CLINIC_ENV + '/patients')
       .then(response => {
         setPatients(response.data);
       })
@@ -110,7 +110,7 @@ function DoctorPrescriptions() {
   };
 
   const fetchMedicines = () => {
-    axios.get(process.env.PHARMACY_PORT + '/medicines')
+    axios.get(process.env.REACT_APP_PHARMACY_ENV + '/medicines')
       .then(response => {
         setMedicines(response.data);
       })
@@ -146,7 +146,7 @@ function DoctorPrescriptions() {
       file: '' // Assuming no file to attach
     };
 
-    axios.post(process.env.CLINIC_PORT + '/addPrescription', data)
+    axios.post(process.env.REACT_APP_CLINIC_ENV + '/addPrescription', data)
       .then(response => {
         alert('Prescription created successfully!');
         setShowAddPrescriptionModal(false);

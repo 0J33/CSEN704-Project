@@ -13,7 +13,7 @@ function AdminPackages() {
   }, []);
 
   const fetchPackages = () => {
-    axios.get(process.env.CLINIC_PORT + '/packages')
+    axios.get(process.env.REACT_APP_CLINIC_ENV + '/packages')
       .then(response => {
         setPackages(response.data);
       })
@@ -28,7 +28,7 @@ function AdminPackages() {
     const packageData = Object.fromEntries(formData.entries());
 
     if (isEdit) {
-      axios.put(process.env.CLINIC_PORT + `/editPackage/${currentPackage._id}`, packageData)
+      axios.put(process.env.REACT_APP_CLINIC_ENV + `/editPackage/${currentPackage._id}`, packageData)
         .then(() => {
           fetchPackages();
           setShowModal(false);
@@ -37,7 +37,7 @@ function AdminPackages() {
           console.log(error);
         });
     } else {
-      axios.post(process.env.CLINIC_PORT + '/addPackage', packageData)
+      axios.post(process.env.REACT_APP_CLINIC_ENV + '/addPackage', packageData)
         .then(() => {
           fetchPackages();
           setShowModal(false);
@@ -49,7 +49,7 @@ function AdminPackages() {
   };
 
   const handleDelete = (packageId) => {
-    axios.delete(process.env.CLINIC_PORT + `/removePackage/${packageId}`)
+    axios.delete(process.env.REACT_APP_CLINIC_ENV + `/removePackage/${packageId}`)
       .then(() => {
         fetchPackages();
       })

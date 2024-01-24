@@ -28,7 +28,7 @@ function RegisterPatient() {
         console.log(credentials);
     
         // Making a POST request to the server
-        fetch(process.env.PHARMACY_PORT + '/addPatient', {
+        fetch(process.env.REACT_APP_PHARMACY_ENV + '/addPatient', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

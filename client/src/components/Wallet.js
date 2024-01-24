@@ -11,7 +11,7 @@ function Wallet() {
   }, []);
 
   const fetchWallet = () => {
-    axios.get(process.env.CLINIC_PORT + `/checkWallet/${patientId}`)
+    axios.get(process.env.REACT_APP_CLINIC_ENV + `/checkWallet/${patientId}`)
       .then(response => {
         if (response.data === null) {
           setWallet(0);

@@ -22,7 +22,7 @@ const ChangePasswordClinic = () => {
         console.log(payload);
 
         try {
-            const response = await fetch(process.env.CLINIC_PORT + '/changePassword', {
+            const response = await fetch(process.env.REACT_APP_CLINIC_ENV + '/changePassword', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

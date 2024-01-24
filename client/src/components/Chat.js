@@ -19,7 +19,7 @@ function Chat() {
 
     const fetchChatUsers = (type) => {
         // Placeholder URL - replace with your API endpoint to fetch users
-        const url = type === 'doctor' ? process.env.CLINIC_PORT + '/patients' : process.env.CLINIC_PORT + '/doctors'
+        const url = type === 'doctor' ? process.env.REACT_APP_CLINIC_ENV + '/patients' : process.env.REACT_APP_CLINIC_ENV + '/doctors'
 
         axios.get(url)
             .then(response => {

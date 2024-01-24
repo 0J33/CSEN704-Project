@@ -16,7 +16,7 @@ function AdminPharmacists() {
 
   useEffect(() => {
     if (filter === 'Existing') {
-      axios.get(process.env.PHARMACY_PORT + '/pharmacists')
+      axios.get(process.env.REACT_APP_PHARMACY_ENV + '/pharmacists')
         .then(response => {
           setPharmacists(response.data);
         })
@@ -24,7 +24,7 @@ function AdminPharmacists() {
           console.log(error);
         });
     } else {
-      axios.get(process.env.PHARMACY_PORT + '/getPendingPharmacists')
+      axios.get(process.env.REACT_APP_PHARMACY_ENV + '/getPendingPharmacists')
         .then(response => {
           setPendingPharmacists(response.data);
         })
@@ -40,7 +40,7 @@ function AdminPharmacists() {
   };
 
   const deletePharmacist = () => {
-    axios.delete(process.env.PHARMACY_PORT + `/removePharmacist/${pharmacistToDelete}`)
+    axios.delete(process.env.REACT_APP_PHARMACY_ENV + `/removePharmacist/${pharmacistToDelete}`)
       .then(() => {
         setPharmacists(pharmacists.filter(pharmacist => pharmacist._id !== pharmacistToDelete));
         setShowConfirmationModal(false);
@@ -53,7 +53,7 @@ function AdminPharmacists() {
 
 
   const acceptPharmacist = (pharmacistId) => {
-    axios.put(process.env.PHARMACY_PORT + `/acceptPharmacist/${pharmacistId}`)
+    axios.put(process.env.REACT_APP_PHARMACY_ENV + `/acceptPharmacist/${pharmacistId}`)
       .then(() => {
         setPendingPharmacists(pendingPharmacists.filter(pharmacist => pharmacist._id !== pharmacistId));
         setSuccessMessage('Pharmacist accepted successfully');
@@ -63,7 +63,7 @@ function AdminPharmacists() {
   };
 
   const rejectPharmacist = (pharmacistId) => {
-    axios.put(process.env.PHARMACY_PORT + `/rejectPharmacist/${pharmacistId}`)
+    axios.put(process.env.REACT_APP_PHARMACY_ENV + `/rejectPharmacist/${pharmacistId}`)
       .then(() => {
         setPendingPharmacists(pendingPharmacists.filter(pharmacist => pharmacist._id !== pharmacistId));
         setSuccessMessage('Pharmacist rejected successfully');

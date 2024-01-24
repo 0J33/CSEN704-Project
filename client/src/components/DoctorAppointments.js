@@ -32,7 +32,7 @@ function DoctorAppointments() {
   };
 
   const editAppointment = (appointmentId,status, newStartTime, newEndTime) => {
-    axios.put(process.env.CLINIC_PORT + `/editAppointment/${appointmentId}`, {
+    axios.put(process.env.REACT_APP_CLINIC_ENV + `/editAppointment/${appointmentId}`, {
       // patient_id: rescheduleAppointment.patient_id,
       // doctor_id: localStorage.getItem('userId'),
       // date: newStartTime ? new Date(newStartTime).toISOString().split('T')[0] : new Date().toISOString().split('T')[0],
@@ -50,7 +50,7 @@ function DoctorAppointments() {
   };
 
   const handleCancelAppointment = (appointmentId) => {
-    axios.post(process.env.CLINIC_PORT + `/cancelAppointment/${appointmentId}`)
+    axios.post(process.env.REACT_APP_CLINIC_ENV + `/cancelAppointment/${appointmentId}`)
       .then(response => {
         alert('Appointment canceled successfully');
         fetchAppointments(); // Refresh appointments list
@@ -62,7 +62,7 @@ function DoctorAppointments() {
   };
 
   const accAppointment = (appointmentId) => {
-    axios.put(process.env.CLINIC_PORT + `/editAppointment/${appointmentId}`, {
+    axios.put(process.env.REACT_APP_CLINIC_ENV + `/editAppointment/${appointmentId}`, {
       status: "accepted"
     })
     .then(response => {
@@ -81,7 +81,7 @@ function DoctorAppointments() {
   };
 
   const fetchAppointments = () => {
-    axios.get(process.env.CLINIC_PORT + '/getAppointmentsByDoctor/' + localStorage.getItem('userId'))
+    axios.get(process.env.REACT_APP_CLINIC_ENV + '/getAppointmentsByDoctor/' + localStorage.getItem('userId'))
       .then(response => {
         console.log(response.data);
         const appointmentsData = response.data;
@@ -142,7 +142,7 @@ function DoctorAppointments() {
       doctor_id: localStorage.getItem('userId')
     };
 
-    axios.post(process.env.CLINIC_PORT + '/addAppointment', appointmentData)
+    axios.post(process.env.REACT_APP_CLINIC_ENV + '/addAppointment', appointmentData)
       .then(response => {
         console.log(response.data);
         setShowAddModal(false);

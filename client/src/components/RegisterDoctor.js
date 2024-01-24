@@ -68,7 +68,7 @@ function RegisterDoctor() {
 
        // console.log(JSON.stringify(credentials))
 
-        fetch(process.env.CLINIC_PORT + '/addDoctor', {
+        fetch(process.env.REACT_APP_CLINIC_ENV + '/addDoctor', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

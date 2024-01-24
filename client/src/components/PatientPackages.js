@@ -22,7 +22,7 @@ function PatientPackages() {
   }, []);
 
   const fetchPackages = () => {
-    axios.get(process.env.CLINIC_PORT + '/packages')
+    axios.get(process.env.REACT_APP_CLINIC_ENV + '/packages')
       .then(response => {
         setPackages(response.data);
       })
@@ -32,7 +32,7 @@ function PatientPackages() {
   };
 
   const fetchMyPackage = () => {
-    axios.get(process.env.CLINIC_PORT + '/getPatientById/' + localStorage.getItem('userId'))
+    axios.get(process.env.REACT_APP_CLINIC_ENV + '/getPatientById/' + localStorage.getItem('userId'))
       .then(response => {
         if(response.data.renewal_date){
           setRenewalDate(response.data.renewal_date);
@@ -53,7 +53,7 @@ function PatientPackages() {
 
   const fetchFamilyMembers = () => {
     // Replace with your actual API endpoint
-    axios.get(process.env.CLINIC_PORT + '/getFamilyMembers/' + localStorage.getItem('userId'))
+    axios.get(process.env.REACT_APP_CLINIC_ENV + '/getFamilyMembers/' + localStorage.getItem('userId'))
       .then(response => {
         setFamilyMembers(response.data);
       })
@@ -94,7 +94,7 @@ function PatientPackages() {
 
 
 
-    axios.put(process.env.CLINIC_PORT + `/subscribePackage/${patientId}/`, {
+    axios.put(process.env.REACT_APP_CLINIC_ENV + `/subscribePackage/${patientId}/`, {
       package_id: packageId,
       payment_type: method,
       family_member: family_member
@@ -107,7 +107,7 @@ function PatientPackages() {
           setShowPaymentModal(false);
         }
 
-        axios.get(process.env.CLINIC_PORT + '/getPatientById/' + localStorage.getItem('userId'))
+        axios.get(process.env.REACT_APP_CLINIC_ENV + '/getPatientById/' + localStorage.getItem('userId'))
           .then(response => {
             setMyPackage([response.data.health_package]);
           })
@@ -127,7 +127,7 @@ function PatientPackages() {
   const unsubscribe = async (familyMemberNationalId = null) => {
     const patientId = localStorage.getItem('userId');
     try {
-      await axios.put(process.env.CLINIC_PORT + `/unsubscribePackage/${patientId}`, {
+      await axios.put(process.env.REACT_APP_CLINIC_ENV + `/unsubscribePackage/${patientId}`, {
         family_member: familyMemberNationalId
       });
       alert('Unsubscribed successfully');

@@ -15,7 +15,7 @@ function DoctorEdit() {
   const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
-    axios.get(process.env.CLINIC_PORT + `/getDoctorById/${doctorId}`)
+    axios.get(process.env.REACT_APP_CLINIC_ENV + `/getDoctorById/${doctorId}`)
       .then(response => {
         setDoctorInfo(response.data);
       })
@@ -30,7 +30,7 @@ function DoctorEdit() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.put(process.env.CLINIC_PORT + `/editDoctorDetails/${doctorId}`, doctorInfo)
+    axios.put(process.env.REACT_APP_CLINIC_ENV + `/editDoctorDetails/${doctorId}`, doctorInfo)
       .then(() => {
         setSuccessMessage('Doctor information updated successfully!');
       })

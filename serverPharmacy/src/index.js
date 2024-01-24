@@ -81,8 +81,8 @@ app.post('/create-checkout-session', async (req, res) => {
             payment_method_types: ['card'],
             mode: 'payment',
             line_items: lineItems,
-            success_url: process.env.PHARMACY_PORT + '/patient/medicines',
-            cancel_url: process.env.PHARMACY_PORT + '/',
+            success_url: process.env.REACT_APP_PHARMACY_ENV + '/patient/medicines',
+            cancel_url: process.env.REACT_APP_PHARMACY_ENV + '/',
         });
 
         res.json({ url: session.url });

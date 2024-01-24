@@ -11,7 +11,7 @@ function AdminAdminsClinic() {
   const [adminToDelete, setAdminToDelete] = useState(null);
 
   useEffect(() => {
-    axios.get(process.env.CLINIC_PORT + '/admins')
+    axios.get(process.env.REACT_APP_CLINIC_ENV + '/admins')
       .then(response => {
         setAdmins(response.data);
       })
@@ -21,7 +21,7 @@ function AdminAdminsClinic() {
   }, []);
 
   const addAdmin = () => {
-    axios.post(process.env.CLINIC_PORT + '/addAdmin', newAdmin)
+    axios.post(process.env.REACT_APP_CLINIC_ENV + '/addAdmin', newAdmin)
       .then(response => {
         setAdmins([...admins, response.data]); // Assuming response.data is the added admin
         setShowModal(false);
@@ -37,7 +37,7 @@ function AdminAdminsClinic() {
   };
 
   const deleteAdmin = () => {
-    axios.delete(process.env.CLINIC_PORT + `/removeAdmin/${adminToDelete}`)
+    axios.delete(process.env.REACT_APP_CLINIC_ENV + `/removeAdmin/${adminToDelete}`)
       .then(() => {
         setAdmins(admins.filter(admin => admin._id !== adminToDelete));
         setShowConfirmationModal(false);

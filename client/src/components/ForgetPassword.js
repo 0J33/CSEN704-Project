@@ -20,7 +20,7 @@ const ForgetPassword = () => {
 
     const requestOTP = async () => {
         try {
-            const response = await fetch(process.env.PHARMACY_PORT + '/resetPassword', {
+            const response = await fetch(process.env.REACT_APP_PHARMACY_ENV + '/resetPassword', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -42,7 +42,7 @@ const ForgetPassword = () => {
 
     const verifyOTP = async () => {
         try {
-            const response = await fetch(process.env.PHARMACY_PORT + `/checkOTP/${username}`, {
+            const response = await fetch(process.env.REACT_APP_PHARMACY_ENV + `/checkOTP/${username}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -63,7 +63,7 @@ const ForgetPassword = () => {
 
     const changePassword = async () => {
         try {
-            const response = await fetch(process.env.PHARMACY_PORT + '/changePassword', {
+            const response = await fetch(process.env.REACT_APP_PHARMACY_ENV + '/changePassword', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
