@@ -237,8 +237,12 @@ function Patient() {
         <Modal.Header closeButton>
           <Modal.Title>My Orders</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          {orders.map(renderOrderItem)}
+        <Modal.Body style={{ backgroundColor: '#f8f9fa', padding: '20px' }}>
+          {orders.map((order, index) => (
+            <div key={index} style={{ marginBottom: '10px' }}>
+              {renderOrderItem(order)}
+            </div>
+          ))}
         </Modal.Body>
       </Modal>
 

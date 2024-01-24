@@ -98,6 +98,7 @@ const handleUnarchiveMedicine = (medicineId) => {
   const payWithCard = () => {
     axios.post(process.env.REACT_APP_PHARMACY_ENV + `/payWithCard/${orderId}`)
       .then(response => {
+        console.log(response.data.url);
         window.location = response.data.url; // Redirect to payment gateway
       })
       .catch(error => console.error('Error paying with card:', error));
@@ -113,6 +114,7 @@ const handleUnarchiveMedicine = (medicineId) => {
   };
 
   const handleCheckout = () => {
+    createOrder();
     if (!orderId) {
       alert('Please create an order first.');
       return;
@@ -371,8 +373,7 @@ const fetchMedicines = () => {
                       onChange={(e) => setPaymentMethod(e.target.value)}
                     />
                   </Form.Group>
-                  <Button onClick={createOrder}>Checkout</Button>
-                  <Button onClick={handleCheckout}>Pay</Button>
+                  <Button onClick={handleCheckout}>Checkout</Button>
                 </>
               )}
             </Modal.Body>
