@@ -147,3 +147,5 @@ app.get("/getMedNotifications", getNotifications);
 app.post("/sendMessage", sendMessage);
 app.get("/getMessages", getMessages);
 app.get("/getChats", getChats);
+
+module.exports = app;

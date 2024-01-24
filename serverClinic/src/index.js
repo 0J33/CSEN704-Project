@@ -164,3 +164,5 @@ app.put("/acceptFollowUp/:id", acceptFollowUp);
 app.put("/revokeFollowUp/:id", revokeFollowUp);
 app.get("/getPendingAppointments", getPendingAppointments);
 app.post("/acceptContract/:id", acceptContract);
+
+module.exports = app;
