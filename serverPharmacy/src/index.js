@@ -77,8 +77,8 @@ app.post('/create-checkout-session', async (req, res) => {
             };
         }));
 
-        const success_url = process.env.REACT_APP_PHARMACY_ENV + '/patient/medicines';
-        const cancel_url = process.env.REACT_APP_PHARMACY_ENV + '/';
+        const success_url = process.env.REACT_APP_CLIENT_ENV + '/patient/medicines';
+        const cancel_url = process.env.REACT_APP_CLIENT_ENV + '/';
 
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],

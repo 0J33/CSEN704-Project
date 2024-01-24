@@ -71,8 +71,8 @@ app.post('/create-checkout-session', async (req, res) => {
             };
         }));
 
-        const success_url = process.env.REACT_APP_CLINIC_ENV + '/patient-clinic/appointments';
-        const cancel_url = process.env.REACT_APP_CLINIC_ENV + '/patient-clinic/appointments';
+        const success_url = process.env.REACT_APP_CLIENT_ENV + '/patient-clinic/appointments';
+        const cancel_url = process.env.REACT_APP_CLIENT_ENV + '/patient-clinic/appointments';
         
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
