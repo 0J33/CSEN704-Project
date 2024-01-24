@@ -51,7 +51,6 @@ function Login() {
     };
 
     const loginClinic = () => {
-        console.log("All environment variables:", process.env);
         // Making a POST request to the server
         fetch(process.env.REACT_APP_CLINIC_ENV + '/login', {
             method: 'POST',
