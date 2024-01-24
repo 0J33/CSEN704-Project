@@ -239,7 +239,7 @@ function Patient() {
         </Modal.Header>
         <Modal.Body style={{ backgroundColor: '#f8f9fa', padding: '20px' }}>
           {orders.map((order, index) => (
-            <div key={index} style={{ marginBottom: '10px' }}>
+            <div key={index} style={{ marginBottom: '10px', border: '1px solid #ccc', borderRadius: '10px', padding: '10px' }}>
               {renderOrderItem(order)}
             </div>
           ))}
