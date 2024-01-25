@@ -1039,7 +1039,15 @@ const getChats = async (req, res) => {
         const chats = await chatModel.find({ user1_id: id });
         const chats2 = await chatModel.find({ user2_id: id });
         const chats3 = chats.concat(chats2);
-        res.status(200).json(chats3);
+        var users = [];
+        for (var i = 0; i < chats3.length; i++) {
+            if (chats3[i].user1_id.toString() === id) {
+                users.push(chats3[i].user2_id);
+            } else {
+                users.push(chats3[i].user1_id);
+            }
+        }
+        res.status(200).json({ chats: chats3, users: users });
     }
     catch (error) {
         res.status(409).json({ message: error.message });

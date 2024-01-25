@@ -297,7 +297,6 @@ const getAppointments = async (req, res) => {
 
 }
 
-
 const getPatientById = async (req, res) => {
     const { id } = req.params;
     try {
@@ -342,6 +341,23 @@ const getPatientsByAppointments = async (req, res) => {
             }
         }
         res.status(200).json(patientsByAppointments);
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+}
+
+const getDoctorsByAppointments = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const appointments = await appointmentModel.find();
+        const doctorsByAppointments = [];
+        for (let i = 0; i < appointments.length; i++) {
+            if (appointments[i].patient_id == id) {
+                const doctor = await doctorModel.findById(appointments[i].doctor_id);
+                doctorsByAppointments.push(doctor);
+            }
+        }
+        res.status(200).json(doctorsByAppointments);
     } catch (error) {
         res.status(404).json({ message: error.message });
     }
@@ -1700,22 +1716,39 @@ const getChats = async (req, res) => {
         const chats = await chatModel.find({ user1_id: id });
         const chats2 = await chatModel.find({ user2_id: id });
         const chats3 = chats.concat(chats2);
-        res.status(200).json(chats3);
+        var users = [];
+        for (var i = 0; i < chats3.length; i++) {
+            if (chats3[i].user1_id.toString() === id) {
+                users.push(chats3[i].user2_id);
+            } else {
+                users.push(chats3[i].user1_id);
+            }
+        }
+        res.status(200).json({ chats: chats3, users: users });
     }
     catch (error) {
         res.status(409).json({ message: error.message });
     }
 }
 
-const checkPatientDoctorChat = async (req, res) => {
-    const { id, doctor_id } = req.body;
+const getPatientsDoctorsChats = async (req, res) => {
+    const { id } = req.body;
     try {
-        const appointments = await appointmentModel.find({ patient_id: id, doctor_id: doctor_id });
-        if (appointments.length > 0) {
-            res.status(200).json(true);
-        } else {
-            res.status(200).json(false);
+        var chats = [];
+        const patient = await patientModel.findById(id);
+        const doctor = await doctorModel.findById(id);
+        if (patient) {
+            const appointments = await appointmentModel.find({ patient_id: id });
+            for (var i = 0; i < appointments.length; i++) {
+                chats.append(appointment.doctor_id);
+            }
+        } else if (doctor) {
+            const appointments = await appointmentModel.find({ doctor_id: id });
+            for (var i = 0; i < appointments.length; i++) {
+                chats.append(appointment.patient_id);
+            }
         }
+        res.status(200).json(chats);
     }
     catch (error) {
         res.status(409).json({ message: error.message });
@@ -1725,20 +1758,24 @@ const checkPatientDoctorChat = async (req, res) => {
 const getNotifications = async (req, res) => {
     const { id } = req.params;
     try {
-        const patient = await patientModel.findById(id);
-        if (patient) {
-            const notifications = await notificationModel.find({ patient_id: id });
-        } else {
-            const doctor = await doctorModel.findById(id);
-            if (doctor) {
-                const notifications = await notificationModel.find({ doctor_id: id });
+        const appointments = await appointmentModel.find();
+        var notifications = [];
+        for (var i = 0; i < appointments.length; i++) {
+            if (appointments[i].patient_id.toString() === id || appointments[i].doctor_id.toString() === id) {
+                const notification = await notificationModel.find({ appointment_id: appointments[i]._id.toString() });
+                if (notification) {
+                    for (var j = 0; j < notification.length; j++) {
+                        notifications.push(notification[j]);
+                    }
+                }
             }
         }
         res.status(200).json(notifications);
     }
     catch (error) {
         res.status(409).json({ message: error.message });
+        console.log(error);
     }
 }
 
-module.exports = { subscribePres, getAppointments, acceptContract, addPatient, addDoctor, addAdmin, removeDoctor, removePatient, getPendingDoctors, addPackage, editPackage, removePackage, editDoctorDetails, addFamilyMember, getFamilyMembers, getAppointmentsByDate, getAppointmentsByStatus, getPatientById, getAllPatients, getPatientByName, getPatientsByAppointments, getDoctors, getDoctorByName, getDoctorBySpecialty, getDoctorByDateTime, getDoctorBySpecialtyAndDateTime, getDoctorByDate, getDoctorBySpecialtyAndDate, getDoctorById, getPrescriptionsByPatient, getPrescriptionsByDate, getPrescriptionsByDoctor, getPrescriptionByStatus, getPrescription, addAppointment, editAppointment, removeAppointment, addPrescription, editPrescription, removePrescription, getAdmins, removeAdmin, getPackages, getAppointmentsByPatient, getAppointmentsByDoctor, getPatientsByUpcomingAppointments, getPackageForPatient, acceptDoctor, rejectDoctor, getUserId, getUserType, login, changePassword, checkOTP, resetPassword, uploadHealthRecord, getHealthRecords, removeHealthRecord, getPackage, subscribePackage, getCurrentPackage, unsubscribePackage, selectAppointment, scheduleFollowUpDoctor, scheduleFollowUpPatient, getPendingAppointments, acceptFollowUp, revokeFollowUp, checkWallet, cancelAppointment, downloadPrescription, sendMessage, getMessages, getChats, checkPatientDoctorChat, getNotifications };
+module.exports = { subscribePres, getAppointments, acceptContract, addPatient, addDoctor, addAdmin, removeDoctor, removePatient, getPendingDoctors, addPackage, editPackage, removePackage, editDoctorDetails, addFamilyMember, getFamilyMembers, getAppointmentsByDate, getAppointmentsByStatus, getPatientById, getAllPatients, getPatientByName, getPatientsByAppointments, getDoctors, getDoctorByName, getDoctorBySpecialty, getDoctorByDateTime, getDoctorBySpecialtyAndDateTime, getDoctorByDate, getDoctorBySpecialtyAndDate, getDoctorById, getPrescriptionsByPatient, getPrescriptionsByDate, getPrescriptionsByDoctor, getPrescriptionByStatus, getPrescription, addAppointment, editAppointment, removeAppointment, addPrescription, editPrescription, removePrescription, getAdmins, removeAdmin, getPackages, getAppointmentsByPatient, getAppointmentsByDoctor, getPatientsByUpcomingAppointments, getPackageForPatient, acceptDoctor, rejectDoctor, getUserId, getUserType, login, changePassword, checkOTP, resetPassword, uploadHealthRecord, getHealthRecords, removeHealthRecord, getPackage, subscribePackage, getCurrentPackage, unsubscribePackage, selectAppointment, scheduleFollowUpDoctor, scheduleFollowUpPatient, getPendingAppointments, acceptFollowUp, revokeFollowUp, checkWallet, cancelAppointment, downloadPrescription, sendMessage, getMessages, getChats, getPatientsDoctorsChats, getNotifications, getDoctorsByAppointments };

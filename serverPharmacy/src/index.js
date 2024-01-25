@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const MongoURI = process.env.MONGO_URI;
-const {addPatient, addPharmacist, addAdmin, removePharmacist, removePatient, getPendingPharmacists, getMedicines, addMedicine, editMedicine, getMedicineByName, getMedicineByUse, getPatientById, getPharmacistById, getAdmins, getPatients, getPharmacists, acceptPharmacist, rejectPharmacist, getUserId, getUserType, login, checkOTP, changePassword, resetPassword, addMedicineToCart, removeMedicineFromCart, changeMedicineQuantityInCart, createOrder, getCart, addAddress, getAddresses, payWithWallet, payWithCard, payWithCash, getOrder, getOrders, cancelOrder, checkWallet, archiveMedicine, unarchiveMedicine, getSalesReport, getSalesReportByMedicine, getSalesReportByDate, getSalesReportByMedicineAndDate, addPerscriptionToCart, getOrdersByPatient, getAlternativeMedicines, checkMedicinesStockHelper, getNotifications, sendMessage, getMessages, getChats} = require("./routes/controller");
+const {addPatient, addPharmacist, addAdmin, removePharmacist, removePatient, getPendingPharmacists, getMedicines, addMedicine, editMedicine, getMedicineByName, getMedicineByUse, getPatientById, getPharmacistById, getAdmins, getPatients, getPharmacists, acceptPharmacist, rejectPharmacist, getUserId, getUserType, login, checkOTP, changePassword, resetPassword, addMedicineToCart, removeMedicineFromCart, changeMedicineQuantityInCart, createOrder, getCart, addAddress, getAddresses, payWithWallet, payWithCard, payWithCash, getOrder, getOrders, cancelOrder, checkWallet, archiveMedicine, unarchiveMedicine, getSalesReport, getSalesReportByMedicine, getSalesReportByDate, getSalesReportByMedicineAndDate, addPerscriptionToCart, getOrdersByPatient, getAlternativeMedicines, checkMedicinesStockHelper, getNotifications, sendMessage, getMessages, getChats } = require("./routes/controller");
 const bodyParser = require('body-parser');
 
 
@@ -45,10 +45,11 @@ app.post("/login", async (req, res) => {
         const userPayload = {
             userId: userId,
             username: username,
-            type: userType
+            userType: userType,
+            site: 'pharmacy'
         };
         const token = jwt.sign(userPayload, secretKey, { expiresIn: '1h' });
-        res.json({ token, username, userId, userType });
+        res.json({ token, username, userId, userType, site: 'pharmacy'});
     } else {
         res.status(401).json({ message: "Incorrect username or password." });
     }

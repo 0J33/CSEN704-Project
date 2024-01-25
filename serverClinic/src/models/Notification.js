@@ -3,8 +3,7 @@ const Schema = mongoose.Schema;
 
 const notificationSchema = new Schema({
     appointment_id: {
-        type: Schema.Types.ObjectId,
-        ref: 'Appointment',
+        type: String,
         required: true
     },
     status: {

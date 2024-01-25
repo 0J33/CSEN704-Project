@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const MongoURI = process.env.MONGO_URI;
-const { addPatient, addDoctor, addAdmin, removeDoctor, removePatient, getPendingDoctors, addPackage, editPackage, removePackage, editDoctorDetails, addFamilyMember, getFamilyMembers, getAppointmentsByDate, getAppointmentsByStatus, getPatientById, getAllPatients, getPatientByName, getPatientsByAppointments, getDoctors, getDoctorByName, getDoctorBySpecialty, getDoctorByDateTime, getDoctorBySpecialtyAndDateTime, getDoctorByDate, getDoctorBySpecialtyAndDate, getDoctorById, getPrescriptionsByPatient, getPrescriptionsByDate, getPrescriptionsByDoctor, getPrescriptionByStatus, getPrescription, addAppointment, editAppointment, removeAppointment, addPrescription, editPrescription, removePrescription, getAdmins, removeAdmin, getPackages, getAppointmentsByPatient, getAppointmentsByDoctor, getPatientsByUpcomingAppointments, getPackageForPatient, acceptDoctor, rejectDoctor, getUserId, getUserType, login, changePassword, checkOTP, resetPassword, uploadHealthRecord, getHealthRecords, getPackage, subscribePackage, getCurrentPackage, unsubscribePackage, selectAppointment, scheduleFollowUpDoctor, scheduleFollowUpPatient, getPendingAppointments, acceptFollowUp, revokeFollowUp, checkWallet, cancelAppointment, downloadPrescription, sendMessage, getMessages, getChats, checkPatientDoctorChat, removeHealthRecord, acceptContract, getAppointments, subscribePres, getNotifications } = require('./routes/controller');
+const { addPatient, addDoctor, addAdmin, removeDoctor, removePatient, getPendingDoctors, addPackage, editPackage, removePackage, editDoctorDetails, addFamilyMember, getFamilyMembers, getAppointmentsByDate, getAppointmentsByStatus, getPatientById, getAllPatients, getPatientByName, getPatientsByAppointments, getDoctors, getDoctorByName, getDoctorBySpecialty, getDoctorByDateTime, getDoctorBySpecialtyAndDateTime, getDoctorByDate, getDoctorBySpecialtyAndDate, getDoctorById, getPrescriptionsByPatient, getPrescriptionsByDate, getPrescriptionsByDoctor, getPrescriptionByStatus, getPrescription, addAppointment, editAppointment, removeAppointment, addPrescription, editPrescription, removePrescription, getAdmins, removeAdmin, getPackages, getAppointmentsByPatient, getAppointmentsByDoctor, getPatientsByUpcomingAppointments, getPackageForPatient, acceptDoctor, rejectDoctor, getUserId, getUserType, login, changePassword, checkOTP, resetPassword, uploadHealthRecord, getHealthRecords, getPackage, subscribePackage, getCurrentPackage, unsubscribePackage, selectAppointment, scheduleFollowUpDoctor, scheduleFollowUpPatient, getPendingAppointments, acceptFollowUp, revokeFollowUp, checkWallet, cancelAppointment, downloadPrescription, sendMessage, getMessages, getChats, getPatientsDoctorsChats, removeHealthRecord, acceptContract, getAppointments, subscribePres, getNotifications, getDoctorsByAppointments } = require('./routes/controller');
 const app = express();
 const cors = require("cors");
 const bodyParser = require("body-parser");
@@ -39,10 +39,11 @@ app.post("/login", async (req, res) => {
         const userPayload = {
             userId: userId,
             username: username,
-            type: userType
+            userType: userType,
+            site: 'clinic'
         };
         const token = jwt.sign(userPayload, secretKey, { expiresIn: '1h' });
-        res.json({ token, username, userId, userType });
+        res.json({ token, username, userId, userType, site: 'clinic'});
     } else {
         res.status(401).json({ message: "Incorrect username or password." });
     }
@@ -126,6 +127,7 @@ app.get('/getDoctorBySpecialtyAndDateTime/:specialty/:datetime', getDoctorBySpec
 app.get('/getDoctorByDate/:date', getDoctorByDate);
 app.get('/getDoctorBySpecialtyAndDate/:specialty/:date', getDoctorBySpecialtyAndDate);
 app.get('/getDoctorById/:id', getDoctorById);
+app.get('/getDoctorsByAppointments/:id', getDoctorsByAppointments);
 app.post('/addPrescription', addPrescription);
 app.put('/editPrescription/:id', editPrescription);
 app.delete('/removePrescription/:id', removePrescription);
@@ -159,7 +161,7 @@ app.get("/downloadPrescription/:id", downloadPrescription);
 app.post("/sendMessage", sendMessage);
 app.get("/getMessages", getMessages);
 app.get("/getChats", getChats);
-app.get("/checkPatientDoctorChat", checkPatientDoctorChat);
+app.get("/getPatientsDoctorsChats", getPatientsDoctorsChats);
 app.put("/acceptFollowUp/:id", acceptFollowUp);
 app.put("/revokeFollowUp/:id", revokeFollowUp);
 app.get("/getPendingAppointments", getPendingAppointments);

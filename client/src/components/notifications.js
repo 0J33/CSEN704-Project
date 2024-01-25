@@ -13,7 +13,6 @@ function Notifications() {
     const fetchNotifications = () => {
         axios.get(process.env.REACT_APP_CLINIC_ENV + `/getNotifications/${localStorage.getItem('userId')}`)
             .then(response => {
-                console.log(response.data);
                 setNotifications(response.data);
             })
             .catch(error => {
@@ -37,7 +36,8 @@ function Notifications() {
                         <ListGroup>
                             {notifications.map((notification, index) => (
                                 <ListGroup.Item key={index}>
-                                    {notification}
+                                    <p>Appointment ID: {notification.appointment_id}</p>
+                                    <p>Appointment Status: {notification.status}</p>
                                 </ListGroup.Item>
                             ))}
                         </ListGroup>

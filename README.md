@@ -149,7 +149,7 @@ npm install
 - `POST /sendMessage/:id/:receiver_id` - Send a message
 - `GET /getMessages/:id` - Get messages
 - `GET /getChats/:id` - Get all chats for a user
-- `GET /checkPatientDoctorChat/:id/:receiver_id` - Check if a chat exists between a patient and a doctor
+- `GET /getPatientsDoctorsChats/:id/:receiver_id` - Check if a chat exists between a patient and a doctor
 
 ## Health Record APIs
 

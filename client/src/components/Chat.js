@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { ChatEngine } from 'react-chat-engine';
 import axios from 'axios';
 
-// TODO: fix chat
 // TODO: add chat styling
 
 function Chat() {
@@ -10,22 +9,6 @@ function Chat() {
     const [selectedUser, setSelectedUser] = useState('');
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState('');
-    const [site, setSite] = useState('');
-
-    if (localStorage.getItem('userType') === 'pharmacist') {
-        setSite('pharmacy');
-    } else if (localStorage.getItem('userType') === 'doctor') {
-        setSite('clinic');
-    } else if (localStorage.getItem('userType') === 'patient') {
-        axios.get(process.env.REACT_APP_CLINIC_ENV + `/getPatientById/${localStorage.getItem('userId')}`)
-            .then(response => {
-                if (response.data) {
-                    setSite('clinic');
-                } else {
-                    setSite('pharmacy');
-                }
-            })
-    }
 
     useEffect(() => {
         // Fetch chat users on component mount
@@ -37,106 +20,70 @@ function Chat() {
 
     const fetchChatUsers = () => {
         var users = [];
-        if (site === 'clinic') {
-            if (localStorage.getItem('userType') === 'doctor') {
-                // get all pharmacists + get all patients with appointments with this doctor
-
-                axios.get(process.env.REACT_APP_PHARMACY_ENV + '/pharmacists')
-                    .then(response => {
-                        users = response.data;
-                    })
-                    .catch(error => {
-                        console.error('Error fetching pharmacists:', error);
+        if (localStorage.getItem('userType') === 'patient' && localStorage.getItem('site') === 'clinic') {
+            axios.get(process.env.REACT_APP_CLINIC_ENV + '/getDoctorsByAppointments/' + localStorage.getItem('userId'))
+                .then(response => {
+                    response.data.forEach(doctor => {
+                        users.push(doctor);
                     });
-
-                axios.get(process.env.REACT_APP_CLINIC_ENV + '/patients')
-                    .then(response => {
-                        for (var i = 0; i < response.data.length; i++) {
-                            axios.get(process.env.REACT_APP_CLINIC_ENV + '/checkPatientDoctorChat', {
-                                params: {
-                                    patient_id: response.data[i]._id,
-                                    doctor_id: localStorage.getItem('userId')
-                                }
-                            })
-                                .then(response => {
-                                    if (response.data) {
-                                        users.push(response.data);
-                                    }
-                                })
-                                .catch(error => {
-                                    console.error('Error fetching patients:', error);
-                                });
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error fetching patients:', error);
+                })
+                .catch(error => {
+                    console.error('Error fetching chat users:', error);
+                });
+        } else if (localStorage.getItem('userType') === 'patient' && localStorage.getItem('site') === 'pharmacy') {
+            axios.get(process.env.REACT_APP_PHARMACY_ENV + '/pharmacists')
+                .then(response => {
+                    response.data.forEach(pharmacist => {
+                        users.push(pharmacist);
                     });
-            } else {
-                // get all pharmacists + get all doctors with appointments with this patient
-
-                axios.get(process.env.REACT_APP_PHARMACY_ENV + '/pharmacists')
-                    .then(response => {
-                        users = response.data;
-                    })
-                    .catch(error => {
-                        console.error('Error fetching pharmacists:', error);
+                })
+                .catch(error => {
+                    console.error('Error fetching chat users:', error);
+                });
+        } else if (localStorage.getItem('userType') === 'doctor') {
+            axios.get(process.env.REACT_APP_CLINIC_ENV + `/getPatientsByAppointments/${localStorage.getItem('userId')}`)                .then(response => {
+                    response.data.forEach(patient => {
+                        users.push(patient);
                     });
-
-                axios.get(process.env.REACT_APP_CLINIC_ENV + '/doctors')
-                    .then(response => {
-                        for (var i = 0; i < response.data.length; i++) {
-                            axios.get(process.env.REACT_APP_CLINIC_ENV + '/checkPatientDoctorChat', {
-                                params: {
-                                    patient_id: localStorage.getItem('userId'),
-                                    doctor_id: response.data[i]._id
-                                }
-                            })
-                                .then(response => {
-                                    if (response.data) {
-                                        users.push(response.data);
-                                    }
-                                })
-                                .catch(error => {
-                                    console.error('Error fetching doctors:', error);
-                                });
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error fetching doctors:', error);
+                })
+                .catch(error => {
+                    console.error('Error fetching chat users:', error);
+                });
+            axios.get(process.env.REACT_APP_PHARMACY_ENV + '/pharmacists')
+                .then(response => {
+                    response.data.forEach(pharmacist => {
+                        users.push(pharmacist);
                     });
-            }
-        } else {
-            if (localStorage.getItem('userType') === 'pharmacist') {
-                // get all doctors + get all patients
-
-                axios.get(process.env.REACT_APP_CLINIC_ENV + '/doctors')
-                    .then(response => {
-                        users = response.data;
-                    })
-                    .catch(error => {
-                        console.error('Error fetching doctors:', error);
+                })
+                .catch(error => {
+                    console.error('Error fetching chat users:', error);
+                });
+        } else if (localStorage.getItem('userType') === 'pharmacist') {
+            axios.get(process.env.REACT_APP_CLINIC_ENV + '/patients')
+                .then(response => {
+                    response.data.forEach(patient => {
+                        users.push(patient);
                     });
-
-                axios.get(process.env.REACT_APP_PHARMACY_ENV + '/patients')
-                    .then(response => {
-                        users = response.data;
-                    })
-                    .catch(error => {
-                        console.error('Error fetching patients:', error);
+                })
+                .catch(error => {
+                    console.error('Error fetching chat users:', error);
+                });
+            axios.get(process.env.REACT_APP_PHARMACY_ENV + '/doctors')
+                .then(response => {
+                    response.data.forEach(doctor => {
+                        users.push(doctor);
                     });
-            } else {
-                // get all pharmacists
-
-                axios.get(process.env.REACT_APP_PHARMACY_ENV + '/pharmacists')
-                    .then(response => {
-                        users = response.data;
-                    })
-                    .catch(error => {
-                        console.error('Error fetching pharmacists:', error);
-                    });
-            }
+                })
+                .catch(error => {
+                    console.error('Error fetching chat users:', error);
+                });
         }
+        console.log(users);
         setChatUsers(users);
+        console.log(chatUsers);
+        if (chatUsers.length > 0) {
+            console.log(users[0]._id);
+        }
     };
 
     const handleUserChange = (event) => {
@@ -147,7 +94,7 @@ function Chat() {
     };
 
     const fetchMessages = (selectedUser) => {
-        if (site === 'clinic') {
+        if (localStorage.getItem('site') === 'clinic') {
             axios.post(process.env.REACT_APP_CLINIC_ENV + '/getMessages', {
                 id: localStorage.getItem('userId'),
                 receiver_id: selectedUser,
@@ -173,7 +120,7 @@ function Chat() {
     };
 
     const handleSendMessage = () => {
-        if (site === 'clinic') {
+        if (localStorage.getItem('site') === 'clinic') {
             axios.post(process.env.REACT_APP_CLINIC_ENV + '/sendMessage', {
                 id: localStorage.getItem('userId'),
                 receiver_id: selectedUser,
@@ -214,7 +161,7 @@ function Chat() {
             <select className="form-control" onChange={handleUserChange} value={selectedUser}>
                 <option value="">Select a user</option>
                 {chatUsers.map(user => (
-                    <option key={user.REACT_APP_CLINIC_ENVid} value={user.username}>
+                    <option key={user._id} value={user._id}>
                         {user.name}
                     </option>
                 ))}

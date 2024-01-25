@@ -31,9 +31,10 @@ function Login() {
         .then(data => {
             console.log(data);
             localStorage.setItem('token', data.token);
-            localStorage.setItem('type', data.userType);
+            localStorage.setItem('userType', data.userType);
             localStorage.setItem('username', data.username);
             localStorage.setItem('userId', data.userId);
+            localStorage.setItem('site', data.site);
 
             if(data.userType === 'patient')
                 window.location.href='/patient';
@@ -67,6 +68,7 @@ function Login() {
             localStorage.setItem('userType', data.userType);
             localStorage.setItem('username', data.username);
             localStorage.setItem('userId', data.userId);
+            localStorage.setItem('site', data.site);
     
             // Redirect based on user type
             if (data.userType === 'admin') {
