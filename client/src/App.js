@@ -13,6 +13,8 @@ import RegisterPatientClinic from './components/RegisterPatientClinic';
 import Doctor from './components/Doctor';
 import RegisterDoctor from './components/RegisterDoctor';
 
+// TODO: fix all reqs
+
 function App() {
   return (
     <Router>
