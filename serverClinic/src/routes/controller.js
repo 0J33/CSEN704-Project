@@ -1655,8 +1655,7 @@ const downloadPrescription = async (req, res) => {
 }
 
 const sendMessage = async (req, res) => {
-    const { id, receiver_id } = req.params;
-    const { message, date, time } = req.body;
+    const { id, receiver_id, message, date, time } = req.body;
     try {
         const chat = await chatModel.findOne({ user1_id: id, user2_id: receiver_id });
         if (!chat) {
@@ -1672,7 +1671,7 @@ const sendMessage = async (req, res) => {
             await chat.save();
         }
 
-        res.status(200).json("Message sent successfully!");
+        res.status(200).json("Message sent successfully");
     }
     catch (error) {
         res.status(409).json({ message: error.message });
@@ -1680,7 +1679,7 @@ const sendMessage = async (req, res) => {
 }
 
 const getMessages = async (req, res) => {
-    const { id, receiver_id } = req.params;
+    const { id, receiver_id } = req.body;
     try {
         const chat = await chatModel.findOne({ user1_id: id, user2_id: receiver_id });
         if (!chat) {
@@ -1696,7 +1695,7 @@ const getMessages = async (req, res) => {
 }
 
 const getChats = async (req, res) => {
-    const { id } = req.params;
+    const { id } = req.body;
     try {
         const chats = await chatModel.find({ user1_id: id });
         const chats2 = await chatModel.find({ user2_id: id });
@@ -1709,7 +1708,7 @@ const getChats = async (req, res) => {
 }
 
 const checkPatientDoctorChat = async (req, res) => {
-    const { id, doctor_id } = req.params;
+    const { id, doctor_id } = req.body;
     try {
         const appointments = await appointmentModel.find({ patient_id: id, doctor_id: doctor_id });
         if (appointments.length > 0) {
