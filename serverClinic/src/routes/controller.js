@@ -241,7 +241,7 @@ const getFamilyMembers = async (req, res) => {
     const { id } = req.params;
     try {
         //populate family members health package
-        const patient = await patientModel.findById(id).populate('family_members.health_package');
+        const patient = await patientModel.findById(id);
         if (!patient) {
             return res.status(404).json({ message: "Patient not found" });
         }
@@ -301,7 +301,7 @@ const getAppointments = async (req, res) => {
 const getPatientById = async (req, res) => {
     const { id } = req.params;
     try {
-        const patient = await patientModel.findById(id).populate('health_package');
+        const patient = await patientModel.findById(id);
         res.status(200).json(patient);
     }
     catch (error) {
@@ -1722,4 +1722,23 @@ const checkPatientDoctorChat = async (req, res) => {
     }
 }
 
-module.exports = { subscribePres, getAppointments, acceptContract, addPatient, addDoctor, addAdmin, removeDoctor, removePatient, getPendingDoctors, addPackage, editPackage, removePackage, editDoctorDetails, addFamilyMember, getFamilyMembers, getAppointmentsByDate, getAppointmentsByStatus, getPatientById, getAllPatients, getPatientByName, getPatientsByAppointments, getDoctors, getDoctorByName, getDoctorBySpecialty, getDoctorByDateTime, getDoctorBySpecialtyAndDateTime, getDoctorByDate, getDoctorBySpecialtyAndDate, getDoctorById, getPrescriptionsByPatient, getPrescriptionsByDate, getPrescriptionsByDoctor, getPrescriptionByStatus, getPrescription, addAppointment, editAppointment, removeAppointment, addPrescription, editPrescription, removePrescription, getAdmins, removeAdmin, getPackages, getAppointmentsByPatient, getAppointmentsByDoctor, getPatientsByUpcomingAppointments, getPackageForPatient, acceptDoctor, rejectDoctor, getUserId, getUserType, login, changePassword, checkOTP, resetPassword, uploadHealthRecord, getHealthRecords, removeHealthRecord, getPackage, subscribePackage, getCurrentPackage, unsubscribePackage, selectAppointment, scheduleFollowUpDoctor, scheduleFollowUpPatient, getPendingAppointments, acceptFollowUp, revokeFollowUp, checkWallet, cancelAppointment, downloadPrescription, sendMessage, getMessages, getChats, checkPatientDoctorChat };
+const getNotifications = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const patient = await patientModel.findById(id);
+        if (patient) {
+            const notifications = await notificationModel.find({ patient_id: id });
+        } else {
+            const doctor = await doctorModel.findById(id);
+            if (doctor) {
+                const notifications = await notificationModel.find({ doctor_id: id });
+            }
+        }
+        res.status(200).json(notifications);
+    }
+    catch (error) {
+        res.status(409).json({ message: error.message });
+    }
+}
+
+module.exports = { subscribePres, getAppointments, acceptContract, addPatient, addDoctor, addAdmin, removeDoctor, removePatient, getPendingDoctors, addPackage, editPackage, removePackage, editDoctorDetails, addFamilyMember, getFamilyMembers, getAppointmentsByDate, getAppointmentsByStatus, getPatientById, getAllPatients, getPatientByName, getPatientsByAppointments, getDoctors, getDoctorByName, getDoctorBySpecialty, getDoctorByDateTime, getDoctorBySpecialtyAndDateTime, getDoctorByDate, getDoctorBySpecialtyAndDate, getDoctorById, getPrescriptionsByPatient, getPrescriptionsByDate, getPrescriptionsByDoctor, getPrescriptionByStatus, getPrescription, addAppointment, editAppointment, removeAppointment, addPrescription, editPrescription, removePrescription, getAdmins, removeAdmin, getPackages, getAppointmentsByPatient, getAppointmentsByDoctor, getPatientsByUpcomingAppointments, getPackageForPatient, acceptDoctor, rejectDoctor, getUserId, getUserType, login, changePassword, checkOTP, resetPassword, uploadHealthRecord, getHealthRecords, removeHealthRecord, getPackage, subscribePackage, getCurrentPackage, unsubscribePackage, selectAppointment, scheduleFollowUpDoctor, scheduleFollowUpPatient, getPendingAppointments, acceptFollowUp, revokeFollowUp, checkWallet, cancelAppointment, downloadPrescription, sendMessage, getMessages, getChats, checkPatientDoctorChat, getNotifications };

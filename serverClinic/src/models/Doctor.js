@@ -79,6 +79,12 @@ const doctorSchema = new Schema({
         type: Buffer,
         required: true
 
+    },
+    wallet: {
+        type: Number,
+        float: true,
+        required: false,
+        default: 0
     }
 });
 

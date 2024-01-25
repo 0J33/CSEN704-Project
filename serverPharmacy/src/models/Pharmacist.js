@@ -63,6 +63,12 @@ const pharmacistSchema = new Schema({
         type: Boolean,
         default: false
     },
+    wallet: {
+        type: Number,
+        float: true,
+        required: false,
+        default: 0
+    }
 });
 
 const Pharmacist = mongoose.model('Pharmacist', pharmacistSchema, 'pharmacy_pharmacists');

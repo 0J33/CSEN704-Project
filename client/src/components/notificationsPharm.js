@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Button, Modal, ListGroup } from 'react-bootstrap';
 import axios from 'axios';
 
-function Notifications() {
+function NotificationsPharm() {
     const [showModal, setShowModal] = useState(false);
     const [notifications, setNotifications] = useState([]);
 
@@ -11,9 +11,8 @@ function Notifications() {
     }, []);
 
     const fetchNotifications = () => {
-        axios.get(process.env.REACT_APP_CLINIC_ENV + `/getNotifications/${localStorage.getItem('userId')}`)
+        axios.get(process.env.REACT_APP_PHARMACY_ENV + '/getMedNotifications')
             .then(response => {
-                console.log(response.data);
                 setNotifications(response.data);
             })
             .catch(error => {
@@ -55,4 +54,4 @@ function Notifications() {
     );
 }
 
-export default Notifications;
+export default NotificationsPharm;
