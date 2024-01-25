@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { ChatEngine } from 'react-chat-engine';
 import axios from 'axios';
 
 // TODO: add chat styling
@@ -78,12 +77,7 @@ function Chat() {
                     console.error('Error fetching chat users:', error);
                 });
         }
-        console.log(users);
         setChatUsers(users);
-        console.log(chatUsers);
-        if (chatUsers.length > 0) {
-            console.log(users[0]._id);
-        }
     };
 
     const handleUserChange = (event) => {
@@ -158,7 +152,7 @@ function Chat() {
     return (
         <div>
             <h1>Chat</h1>
-            <select className="form-control" onChange={handleUserChange} value={selectedUser}>
+            <select className="form-control" onChange={handleUserChange} onClick={fetchChatUsers} value={selectedUser}>
                 <option value="">Select a user</option>
                 {chatUsers.map(user => (
                     <option key={user._id} value={user._id}>
@@ -166,7 +160,7 @@ function Chat() {
                     </option>
                 ))}
             </select>
-
+            <br />
             {selectedUser && (
                 <div>
                     <div>
@@ -183,6 +177,7 @@ function Chat() {
                             value={newMessage}
                             onChange={(e) => setNewMessage(e.target.value)}
                         />
+                        <br /><br />
                         <button onClick={handleSendMessage}>Send</button>
                     </div>
                 </div>

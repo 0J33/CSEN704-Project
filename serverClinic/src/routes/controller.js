@@ -354,7 +354,7 @@ const getDoctorsByAppointments = async (req, res) => {
         for (let i = 0; i < appointments.length; i++) {
             if (appointments[i].patient_id == id) {
                 const doctor = await doctorModel.findById(appointments[i].doctor_id);
-                doctorsByAppointments.push(doctor);
+                doctorsByAppointments.push({ _id: doctor._id, name: doctor.name, username: doctor.username });
             }
         }
         res.status(200).json(doctorsByAppointments);
