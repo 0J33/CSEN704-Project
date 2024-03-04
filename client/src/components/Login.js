@@ -89,10 +89,14 @@ function Login() {
     
 
     return (
+        <>
+        <Navbar bg="light" variant="light" className="mb-4">
+            <Navbar.Brand style={{ marginLeft: "15px" }}><img src="/icon.png" style={{ height: "20px", marginRight: "10px", marginBottom: "2px" }} />El7a2ny - Login</Navbar.Brand>
+        </Navbar>
         <div>
             <form onSubmit={handleSubmit} className="p-4 border rounded" 
                 style={{
-                    width: 'fit-content', 
+                    width: isMobile ? '90%' : 'fit-content', 
                     height: 'fit-content',
                     margin: 'auto',
                     marginTop: '25px'
@@ -138,8 +142,7 @@ function Login() {
                 </div>
             </form>
         </div>
-
-        
+        </>
     );
 }
 

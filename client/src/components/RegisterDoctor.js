@@ -91,7 +91,7 @@ function RegisterDoctor() {
         <Navbar bg="light" variant="light" className="mb-4">
             <Navbar.Brand style={{ marginLeft: "15px" }}><img src="/icon.png" style={{ height: "20px", marginRight: "10px", marginBottom: "2px" }} />El7a2ny Clinic - Doctor Register</Navbar.Brand>
         </Navbar>
-        <div style={{width: '1000px', margin: 'auto', marginTop: '25px', marginBottom: '25px'}}>
+        <div style={{width: isMobile ? '90%' : '1000px', margin: 'auto', marginTop: '25px', marginBottom: '25px'}}>
             <form onSubmit={handleSubmit} className="p-4 border rounded">
                 <div className="mb-3">
                     <label className="form-label">Username:</label>
