@@ -87,7 +87,7 @@ const ForgetPassword = () => {
     return (
         <>
             <Button variant="primary" className="btn btn-danger" onClick={handleShow}>
-                Forget Password
+                Forget Password Pharmacy
             </Button>
 
             <Modal show={show} onHide={handleClose}>
