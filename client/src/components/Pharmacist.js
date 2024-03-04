@@ -58,6 +58,7 @@ function Pharmacist() {
               </Nav.Item>
               <Nav.Link className='mb-1 mt-1 ms-1 me-1'  as={Link} to="/Pharmacist/chat">Chat</Nav.Link>
 
+              <br /><br />
 
               <WalletPharm></WalletPharm>
               <NotificationsPharm></NotificationsPharm>

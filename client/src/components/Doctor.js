@@ -90,6 +90,8 @@ function Doctor() {
               <Nav.Link className='mb-1 mt-1 ms-1 me-1'  onClick={() => setShowContractModal(true)}>View Contract</Nav.Link>
             </Nav.Item>
 
+            <br /><br />
+
             <Wallet></Wallet>
             <Notifications></Notifications>
 

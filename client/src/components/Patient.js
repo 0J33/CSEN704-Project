@@ -132,14 +132,13 @@ function Patient() {
             <Nav.Item>
               <Nav.Link className='mb-1 mt-1 ms-1 me-1'  as={Link} to="/patient/chat">Chat</Nav.Link>
             </Nav.Item>
-            <br />
             <Nav.Item>
-              <Button className='mb-1 mt-1 ms-1 me-1' onClick={() => setShowModalAddress(true)}>Manage My Addresses</Button>
+              <Button className='mb-1 mt-1 ms-1 me-1 nav-link' style={{width: '-webkit-fill-available', textAlign: 'left'}} onClick={() => setShowModalAddress(true)}>Manage My Addresses</Button>
             </Nav.Item>
             <Nav.Item>
-              <Button className='mb-1 mt-1 ms-1 me-1' onClick={() => { setShowModalOrders(true); fetchOrders(); }}>Orders</Button>
+              <Button className='mb-1 mt-1 ms-1 me-1 nav-link' style={{width: '-webkit-fill-available', textAlign: 'left'}} onClick={() => { setShowModalOrders(true); fetchOrders(); }}>Orders</Button>
             </Nav.Item>
-            <br />
+            <br /><br />
             <WalletPharm></WalletPharm>
             <NotificationsPharm></NotificationsPharm>
             <ChangePassword></ChangePassword>

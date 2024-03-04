@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Navbar } from "react-bootstrap";
 
 function RegisterDoctor() {
     const [credentials, setCredentials] = useState({
@@ -86,125 +87,133 @@ function RegisterDoctor() {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="p-4 border rounded">
-            <div className="mb-3">
-                <label className="form-label">Username:</label>
-                <input
-                    type="text"
-                    name="username"
-                    value={credentials.username}
-                    onChange={handleChange}
-                    className="form-control"
-                />
-            </div>
-            <div className="mb-3">
-                <label className="form-label">Password:</label>
-                <input
-                    type="password"
-                    name="password"
-                    value={credentials.password}
-                    onChange={handleChange}
-                    className="form-control"
-                />
-            </div>
-            <div className="mb-3">
-                <label className="form-label">Name:</label>
-                <input
-                    type="text"
-                    name="name"
-                    value={credentials.name}
-                    onChange={handleChange}
-                    className="form-control"
-                />
-            </div>
-            <div className="mb-3">
-                <label className="form-label">Email:</label>
-                <input
-                    type="email"
-                    name="email"
-                    value={credentials.email}
-                    onChange={handleChange}
-                    className="form-control"
-                />
-            </div>
-            <div className="mb-3">
-                <label className="form-label">Date of Birth:</label>
-                <input
-                    type="date"
-                    name="date_of_birth"
-                    value={credentials.date_of_birth}
-                    onChange={handleChange}
-                    className="form-control"
-                />
-            </div>
-            <div className="mb-3">
-                <label className="form-label">Hourly Rate:</label>
-                <input
-                    type="number"
-                    name="hourly_rate"
-                    value={credentials.hourly_rate}
-                    onChange={handleChange}
-                    className="form-control"
-                />
-            </div>
-            <div className="mb-3">
-                <label className="form-label">Affiliation (Hospital):</label>
-                <input
-                    type="text"
-                    name="affiliation"
-                    value={credentials.affiliation}
-                    onChange={handleChange}
-                    className="form-control"
-                />
-            </div>
-            <div className="mb-3">
-                <label className="form-label">Educational Background:</label>
-                <textarea
-                    name="education"
-                    value={credentials.education}
-                    onChange={handleChange}
-                    className="form-control"
-                />
-            </div>
-            <div className="mb-3">
-                <label className="form-label">specialty:</label>
-                <textarea
-                    name="specialty"
-                    value={credentials.specialty}
-                    onChange={handleChange}
-                    className="form-control"
-                />
-            </div>
-            {/* File Inputs for doctor_id, medical_license, medical_degree */}
-            <div className="mb-3">
-                <label className="form-label">Doctor ID:</label>
-                <input
-                    type="file"
-                    name="doctor_id"
-                    onChange={handleFileChange}
-                    className="form-control"
-                />
-            </div>
-            <div className="mb-3">
-                <label className="form-label">Medical License:</label>
-                <input
-                    type="file"
-                    name="medical_license"
-                    onChange={handleFileChange}
-                    className="form-control"
-                />
-            </div>
-            <div className="mb-3">
-                <label className="form-label">Medical Degree:</label>
-                <input
-                    type="file"
-                    name="medical_degree"
-                    onChange={handleFileChange}
-                    className="form-control"
-                />
-            </div>
-            <button type="submit" className="btn btn-primary">Register as Doctor</button>
-        </form>
+        <>
+        <Navbar bg="light" variant="light" className="mb-4">
+            <Navbar.Brand style={{ marginLeft: "15px" }}><img src="/icon.png" style={{ height: "20px", marginRight: "10px", marginBottom: "2px" }} />El7a2ny Clinic - Doctor Register</Navbar.Brand>
+        </Navbar>
+        <div style={{width: '1000px', margin: 'auto', marginTop: '25px', marginBottom: '25px'}}>
+            <form onSubmit={handleSubmit} className="p-4 border rounded">
+                <div className="mb-3">
+                    <label className="form-label">Username:</label>
+                    <input
+                        type="text"
+                        name="username"
+                        value={credentials.username}
+                        onChange={handleChange}
+                        className="form-control"
+                    />
+                </div>
+                <div className="mb-3">
+                    <label className="form-label">Password:</label>
+                    <input
+                        type="password"
+                        name="password"
+                        value={credentials.password}
+                        onChange={handleChange}
+                        className="form-control"
+                    />
+                </div>
+                <div className="mb-3">
+                    <label className="form-label">Name:</label>
+                    <input
+                        type="text"
+                        name="name"
+                        value={credentials.name}
+                        onChange={handleChange}
+                        className="form-control"
+                    />
+                </div>
+                <div className="mb-3">
+                    <label className="form-label">Email:</label>
+                    <input
+                        type="email"
+                        name="email"
+                        value={credentials.email}
+                        onChange={handleChange}
+                        className="form-control"
+                    />
+                </div>
+                <div className="mb-3">
+                    <label className="form-label">Date of Birth:</label>
+                    <input
+                        type="date"
+                        name="date_of_birth"
+                        value={credentials.date_of_birth}
+                        onChange={handleChange}
+                        className="form-control"
+                    />
+                </div>
+                <div className="mb-3">
+                    <label className="form-label">Hourly Rate:</label>
+                    <input
+                        type="number"
+                        name="hourly_rate"
+                        value={credentials.hourly_rate}
+                        onChange={handleChange}
+                        className="form-control"
+                    />
+                </div>
+                <div className="mb-3">
+                    <label className="form-label">Affiliation (Hospital):</label>
+                    <input
+                        type="text"
+                        name="affiliation"
+                        value={credentials.affiliation}
+                        onChange={handleChange}
+                        className="form-control"
+                    />
+                </div>
+                <div className="mb-3">
+                    <label className="form-label">Educational Background:</label>
+                    <textarea
+                        name="education"
+                        value={credentials.education}
+                        onChange={handleChange}
+                        className="form-control"
+                    />
+                </div>
+                <div className="mb-3">
+                    <label className="form-label">specialty:</label>
+                    <textarea
+                        name="specialty"
+                        value={credentials.specialty}
+                        onChange={handleChange}
+                        className="form-control"
+                    />
+                </div>
+                {/* File Inputs for doctor_id, medical_license, medical_degree */}
+                <div className="mb-3">
+                    <label className="form-label">Doctor ID:</label>
+                    <input
+                        type="file"
+                        name="doctor_id"
+                        onChange={handleFileChange}
+                        className="form-control"
+                    />
+                </div>
+                <div className="mb-3">
+                    <label className="form-label">Medical License:</label>
+                    <input
+                        type="file"
+                        name="medical_license"
+                        onChange={handleFileChange}
+                        className="form-control"
+                    />
+                </div>
+                <div className="mb-3">
+                    <label className="form-label">Medical Degree:</label>
+                    <input
+                        type="file"
+                        name="medical_degree"
+                        onChange={handleFileChange}
+                        className="form-control"
+                    />
+                </div>
+                <button type="submit" className="btn btn-primary">Register as Doctor</button>
+            </form>
+        </div>
+        <br />
+        </>
     );
 }
 

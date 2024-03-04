@@ -61,7 +61,7 @@ function PatientClinic() {
                 <Nav.Link className='mb-1 mt-1 ms-1 me-1'  as={Link} to="/patient-clinic/chat">Chat</Nav.Link>
                 <Nav.Link className='mb-1 mt-1 ms-1 me-1'  as={Link} to="https://meet.google.com/">Video Chat</Nav.Link>
 
-
+                <br /><br />
 
               </Nav.Item>
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Nav } from 'react-bootstrap';
 import axios from 'axios';
+import { Button } from 'react-bootstrap';
 
 function Wallet() {
   const [wallet, setWallet] = useState(0);
@@ -26,7 +27,7 @@ function Wallet() {
 
   return (
     <Nav.Item>
-      <Nav.Link className='mb-1 mt-1 ms-1 me-1' >Wallet Balance: ${wallet}</Nav.Link>
+      <Button variant="mb-1 mt-1 ms-1 me-1 btn btn-outline-secondary" style={{width: '-webkit-fill-available', textAlign: 'left'}}>Wallet Balance: ${wallet.toString()}</Button>
     </Nav.Item>
   );
 }

@@ -3,6 +3,21 @@ import axios from 'axios';
 import { Card, Form, Button, Modal, FormControl, DropdownButton, Dropdown } from 'react-bootstrap';
 
 const Medicines = ({ role }) => {
+
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   const [medicines, setMedicines] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [filter, setFilter] = useState('');
@@ -388,7 +403,16 @@ const fetchMedicines = () => {
           medicine.use.toLowerCase().includes(filter.toLowerCase())
         ).map(medicine => (
           <Card key={medicine._id} style={{ width: '18rem', flex: '0 0 auto' }}>
+            { !isMobile &&
+            <>
             <Card.Img variant="top" src={`data:image/jpeg;base64,${btoa(String.fromCharCode(...new Uint8Array(medicine.picture.data)))}`} />
+            </>
+            }
+            { isMobile &&
+            <>
+            <Card.Img variant="top" style={{ height: '200px' }} />
+            </>
+            }
             <Card.Body>
               <Card.Title>{medicine.name}</Card.Title>
               <Card.Text>Price: ${medicine.price}</Card.Text>
