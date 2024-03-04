@@ -1,4 +1,5 @@
 import React from 'react';
+import { useEffect, useState } from 'react';
 import { Container, Row, Col, Nav, Navbar } from 'react-bootstrap';
 import {
     Routes,
@@ -25,6 +26,21 @@ import Notifications from './notifications';
 // import DoctorAppointments from './DoctorAppointments';
 
 function PatientClinic() {
+
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+    useEffect(() => {
+      const handleResize = () => {
+        setIsMobile(window.innerWidth <= 768);
+      };
+
+      window.addEventListener('resize', handleResize);
+
+      return () => {
+        window.removeEventListener('resize', handleResize);
+      };
+    }, []);
+
     return (
       <Container fluid className="h-100 p-0">
         <Navbar bg="light" variant="light" className="mb-4">
@@ -32,7 +48,7 @@ function PatientClinic() {
         </Navbar>
         
         <Row className="h-100">
-          <Col md={3} className="bg-light h-100">
+          <Col md={3} className={isMobile ? "bg-light" : "bg-light h-100"}>
             <Nav className="flex-column mt-3" variant="pills" defaultActiveKey="/doctor/home">
               <Nav.Item>
 
@@ -55,6 +71,11 @@ function PatientClinic() {
               <ChangePasswordClinic></ChangePasswordClinic>
               <Logout> </Logout>
               {/* ... Other doctor routes can go here */}
+
+              { isMobile &&
+                <><br /><br /><br /><br /></>
+              }
+
             </Nav>
           </Col>
           

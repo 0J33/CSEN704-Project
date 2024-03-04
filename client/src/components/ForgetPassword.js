@@ -86,7 +86,7 @@ const ForgetPassword = () => {
 
     return (
         <>
-            <Button variant="primary" className="btn btn-primary" onClick={handleShow}>
+            <Button variant="primary" className="btn btn-danger" onClick={handleShow}>
                 Forget Password
             </Button>
 

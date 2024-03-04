@@ -90,39 +90,53 @@ function Login() {
 
     return (
         <div>
-        <form onSubmit={handleSubmit} className="p-4 border rounded">
-            <div className="mb-3">
-                <label className="form-label">Username:</label>
-                <input 
-                    type="text" 
-                    name="username" 
-                    value={credentials.username} 
-                    onChange={handleChange}
-                    className="form-control"
-                />
-            </div>
-            <div className="mb-3">
-                <label className="form-label">Password:</label>
-                <input 
-                    type="password" 
-                    name="password" 
-                    value={credentials.password} 
-                    onChange={handleChange}
-                    className="form-control"
-                />
-            </div>
-            <button type="submit" className="btn btn-primary">Login In Pharmacy</button> 
-            <button type="button" className="btn btn-primary ms-5" onClick={loginClinic} >Login In Clinic</button> 
-            <br /><br />
-            <button type="button" className="btn btn-secondary" onClick={() => window.location.href='/register-patient'}>Register As Pharmacy Patient</button> 
-            <button type="button" className="btn btn-secondary ms-5" onClick={() => window.location.href='/register-patient-clinic'}>Register As Clinic Patient</button> 
-            <br /><br />
-            <button type="button" className="btn btn-secondary" onClick={() => window.location.href='/register-pharmacist'}>Register As Pharmacist</button> 
-            <button type="button" className="btn btn-secondary ms-5" onClick={() => window.location.href='/register-doctor'}>Register As Doctor</button> 
-            <br /><br />
-            <ForgetPassword></ForgetPassword>
-            <ForgetPasswordClinic></ForgetPasswordClinic>
-        </form>
+            <form onSubmit={handleSubmit} className="p-4 border rounded" 
+                style={{
+                    width: 'fit-content', 
+                    height: 'fit-content',
+                    margin: 'auto',
+                    marginTop: '25px'
+                }}
+            >
+                <div className="mb-3">
+                    <label className="form-label">Username:</label>
+                    <input 
+                        type="text" 
+                        name="username" 
+                        value={credentials.username} 
+                        onChange={handleChange}
+                        className="form-control"
+                    />
+                </div>
+                <div className="mb-3">
+                    <label className="form-label">Password:</label>
+                    <input 
+                        type="password" 
+                        name="password" 
+                        value={credentials.password} 
+                        onChange={handleChange}
+                        className="form-control"
+                    />
+                </div>
+                <div style={{display: 'flex', flexDirection: 'column', gap: '25px'}}>
+                    <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
+                    <button type="submit" className="btn btn-primary">Login In Pharmacy</button> 
+                    <button type="button" className="btn btn-primary ms-5" onClick={loginClinic} >Login In Clinic</button> 
+                    </div>
+                    <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
+                    <button type="button" className="btn btn-secondary" onClick={() => window.location.href='/register-patient'}>Register As Pharmacy Patient</button> 
+                    <button type="button" className="btn btn-secondary ms-5" onClick={() => window.location.href='/register-patient-clinic'}>Register As Clinic Patient</button> 
+                    </div>
+                    <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
+                    <button type="button" className="btn btn-secondary" onClick={() => window.location.href='/register-pharmacist'}>Register As Pharmacist</button> 
+                    <button type="button" className="btn btn-secondary ms-5" onClick={() => window.location.href='/register-doctor'}>Register As Doctor</button> 
+                    </div>
+                    <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
+                    <ForgetPassword></ForgetPassword>
+                    <ForgetPasswordClinic></ForgetPasswordClinic>
+                    </div>
+                </div>
+            </form>
         </div>
 
         

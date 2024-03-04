@@ -86,7 +86,7 @@ const ForgetPasswordClinic = () => {
 
     return (
         <>
-            <Button variant="primary" className="btn btn-primary ms-5" onClick={handleShow}>
+            <Button variant="primary" className="btn btn-danger ms-5" onClick={handleShow}>
                 Forget Password Clinic
             </Button>
 
