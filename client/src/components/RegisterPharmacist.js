@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";import { useState } from "react";
 import { Navbar } from "react-bootstrap";
 
 function RegisterPharmacist() {
