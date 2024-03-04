@@ -106,7 +106,7 @@ function Doctor() {
           </Nav>
         </Col>
 
-        <Col md={9} className="h-100">
+        <Col md={9} className="h-100" style={{width: isMobile ? '90%' : '', marginLeft: isMobile ? '5%' : '', marginRight: isMobile ? '5%' : ''}}>
           <Routes>
             <Route path="edit" element={<DoctorEdit />} />
             <Route path="appointments" element={<DoctorAppointments />} />

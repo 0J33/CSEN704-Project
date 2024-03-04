@@ -152,7 +152,8 @@ function Patient() {
           </Nav>
         </Col>
 
-        <Col md={9} className="h-100">
+        {/* if not mobile no change */}
+        <Col md={9} className="h-100" style={{width: isMobile ? '90%' : '', marginLeft: isMobile ? '5%' : '', marginRight: isMobile ? '5%' : ''}}>
           <Routes>
             <Route path="medicines" element={<Medicines role="patient" />} />
             <Route path="PatientPrescriptions" element={<PatientPrescriptions role="Patient" />} />

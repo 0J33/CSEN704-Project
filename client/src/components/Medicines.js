@@ -395,7 +395,7 @@ const fetchMedicines = () => {
           </Modal>
         </>
       )}
-
+      <br /><br />
       {/* Medicines List */}
       <div className="medicine-list" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '1rem' }}>
         {filteredMedicines.filter(medicine =>
