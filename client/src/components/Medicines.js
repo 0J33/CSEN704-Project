@@ -410,7 +410,12 @@ const fetchMedicines = () => {
             }
             { isMobile &&
             <>
-            <Card.Img variant="top" style={{ height: '200px' }} />
+            <Card.Img
+              variant="top"
+              src={URL.createObjectURL(
+                new Blob([new Uint8Array(medicine.picture.data)], { type: 'image/jpeg' })
+              )}
+            />
             </>
             }
             <Card.Body>
